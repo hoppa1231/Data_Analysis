@@ -37,6 +37,7 @@ class UiMainWindow(object):
         ''' Меню -> Файл -> Сохранить '''
         self.actionExport = QAction(MainWindow)
         self.actionExport.setObjectName(u"actionExport")
+        self.actionExport.triggered.connect(self.save_plot)
 
         ''' Меню -> Помощь -> Информация '''
         self.actionInfo = QAction(MainWindow)
