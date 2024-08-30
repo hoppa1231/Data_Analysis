@@ -1,0 +1,16 @@
+How should work this program?
+
+Step 1
+--- Find PGN in base
+--- Search Bit Info
+--- --- Appeal to SPN
+--- --- Reformat bits to values
+--- --- --- Analysis of instructions
+--- --- --- Recalculation to final form
+--- --- Write need values in DataFrames
+
+Step 2
+--- Draw some graf on plot
+--- Set different color and axes
+--- Opportunity scale, move and zoom
+--- Choose file and save graf
