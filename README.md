@@ -1,7 +1,7 @@
 <h1>Data Analysis</h1>
 
 <p>This program is needed to scan CAN messages and create graphs for analysis.</p>
-<p>She has big functional. For Example: scale, zoom, move, choose some SPN on one plot</p>
+<p>It has big functional. For Example: scale, zoom, move, choose some SPN on one plot</p>
 
 <h3>Tutorial</h3>
 <b><p>1. Open File</p></b>
