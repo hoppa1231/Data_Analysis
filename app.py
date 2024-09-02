@@ -10,8 +10,8 @@ import sys
 from PySide6.QtCore import (QCoreApplication, QMetaObject, QRect, QSize, Qt)
 from PySide6.QtGui import (QAction, QIcon)
 from PySide6.QtWidgets import (QApplication, QMainWindow, QMenu, QMenuBar,
-    QPushButton, QStatusBar, QWidget, QFileDialog, QLabel, QDialog, QVBoxLayout,
-    QScrollArea, QListWidget, QListWidgetItem)
+    QPushButton, QStatusBar, QWidget, QFileDialog, QLabel, QDialog, QHBoxLayout, QVBoxLayout,
+    QScrollArea, QListWidget, QListWidgetItem, QUndoView)
 
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -147,13 +147,30 @@ class UiMainWindow(object):
         self.drawGraph_tools.setFlat(True)
         self.drawGraph_tools.clicked.connect(self.choose_pgn)
 
+        ''' Рабочая область '''
+        self.workArea = QWidget()
+        self.workArea.setObjectName(u"workArea")
+        self.workArea_layout = QHBoxLayout()
+        self.workArea.setLayout(self.workArea_layout)
+        self.central_layout.addWidget(self.workArea)
+
+
         ''' Виджет для графиков '''
         self.areaPlot = QWidget()
         self.areaPlot.setObjectName(u"areaPlot")
-        self.areaPlot.setGeometry(QRect(0, SIZE_TOOLS_BUTTON, SIZE_WINDOW[0], 501))
+        self.areaPlot.setGeometry(QRect(0, SIZE_TOOLS_BUTTON, SIZE_WINDOW[0]-SIZE_LEGEND, 501))
         self.areaPlot_layout = QVBoxLayout()
         self.areaPlot.setLayout(self.areaPlot_layout)
-        self.central_layout.addWidget(self.areaPlot)
+        self.workArea_layout.addWidget(self.areaPlot)
+
+        ''' Зона для легенды '''
+        self.legendWidget = QWidget()
+        self.legendWidget.setObjectName(u"legendWidget")
+        self.legendWidget.setGeometry(QRect(0, SIZE_TOOLS_BUTTON, SIZE_LEGEND, 501))
+        self.legendWidget.setMinimumWidth(SIZE_LEGEND)
+        self.legendWidget_layout = QVBoxLayout()
+        self.legendWidget.setLayout(self.legendWidget_layout)
+        self.workArea_layout.addWidget(self.legendWidget)
 
         MainWindow.setCentralWidget(self.centralwidget)
 
@@ -368,6 +385,10 @@ class UiMainWindow(object):
         canvas = FigureCanvas(self.fig)
         toolbar = NavigationToolbar(canvas, MainWindow)
 
+        count_graph = sum(SPN_Select.values())
+        flag_side = True
+        index_graph = -1
+
         for i, (spn, selected) in enumerate(SPN_Select.items()):
             if selected:
                 ''' Получить PGN, обработать position '''
@@ -378,6 +399,7 @@ class UiMainWindow(object):
                     resolution = SPN_Resolution[spn]
                     offset = SPN_Offset[spn]
                     name = SPN_Name[spn]
+                    index_graph += 1
                 except KeyError:
                     print(f"ERROR: accept_and_print() spn = {spn}")
                     continue
@@ -407,19 +429,29 @@ class UiMainWindow(object):
                     ax.tick_params(axis='y', colors='C%d' % i, rotation=45)
                     ax.legend_.remove()
                     ax.set_label(name)
+                    y_max, y_min = find_y_lim(result_data, i, count_graph)
+                    ax.set_ylim(y_min, y_max)
                 else:
                     ''' Создание накладываемого графа '''
                     ax_new = ax.twinx()
                     sns.lineplot(x=result_data['DateTime'],
                                  y=result_data['Value'], ax=ax_new,
                                  label=f'{name} ({unit})',
-                                 color='C%d' % i,
+                                 color='C%d' % index_graph,
                                  errorbar=EXTEND_ERRORBAR)
-                    ax_new.yaxis.set_label_position("right")
-                    ax_new.yaxis.tick_right()
-                    ax_new.tick_params(axis='y', colors='C%d' % i, rotation=45)
+                    if flag_side:
+                        ax_new.yaxis.set_label_position("right")
+                        ax_new.yaxis.tick_right()
+                        flag_side = False
+                    else:
+                        ax_new.yaxis.set_label_position("left")
+                        ax_new.yaxis.tick_left()
+                        flag_side = True
+                    ax_new.tick_params(axis='y', colors='C%d' % index_graph, rotation=45)
                     ax_new.legend_.remove()
                     ax_new.set_label(name)
+                    y_max, y_min = find_y_lim(result_data, index_graph, count_graph)
+                    ax_new.set_ylim(y_min, y_max)
 
         ax.set_xlabel('Дата и время', fontsize=10)
         ax.xaxis.set_major_locator(MaxNLocator(MainWindow.width()//125))
@@ -434,11 +466,17 @@ class UiMainWindow(object):
         self.areaPlot_layout.addWidget(canvas)
         self.areaPlot_layout.addWidget(toolbar)
         self.feedback_label.setText("График построен")
+        self.legend_bar()
 
     def clear_area(self):
         """ Очищает виджет полотна от старого графика """
         while self.areaPlot_layout.count():
             child = self.areaPlot_layout.takeAt(0)
+            if child.widget():
+                child.widget().deleteLater()
+
+        while self.legendWidget_layout.count():
+            child = self.legendWidget_layout.takeAt(0)
             if child.widget():
                 child.widget().deleteLater()
 
@@ -453,6 +491,24 @@ class UiMainWindow(object):
             except AttributeError:
                 self.feedback_label.setText("График не найден")
                 print("ERROR: save_plot()")
+
+    def legend_bar(self):
+        self.legend_list = QListWidget()
+
+        list_name = []
+        for content, selected in SPN_Select.items():
+            if selected:
+                line = QListWidgetItem(SPN_Name[content])
+                list_name.append(line)
+        for line in list_name[::-1]:
+            self.legend_list.addItem(line)
+        self.legendWidget_layout.addWidget(self.legend_list)
+
+        # self.legend_descript = QLabel()
+        # self.legendWidget_layout.addWidget(self.legend_descript)
+        # TODO: Доделать легенду, добавить кнопки управления
+        #       Сделать возможность выбора функций и отрисовка выбранных
+
 
 
 if __name__ == "__main__":

@@ -201,19 +201,39 @@ def extract_value(filter_data, type_pos : str, array_pos : list):
         res = (8-length)*"0" + res
         return res
 
+    def HEX_split(x):
+        bin_x = hex_to_bin(x)
+        return bin_x[array_pos[1]-1:array_pos[1] + array_pos[-1]-1]
+
     if type_pos == "D":
-        integer = filter_data.iloc[:, array_pos[0]].apply(lambda x: hex_to_bin(x)[array_pos[1]-1:array_pos[1] + array_pos[-1]-1])
+        integer = filter_data.iloc[:, array_pos[0]].apply(HEX_split)
         integer = integer.apply(lambda x: int(x, 2)).rename("Value").to_frame()
 
     elif type_pos == "A":
-        integer = filter_data.iloc[:, list(range(array_pos[0], array_pos[0] + array_pos[-1]))]\
-            .apply(lambda x: hex_to_bin(x)[array_pos[1]-1:array_pos[1] + array_pos[-1]-1])
+        integer = filter_data.iloc[:, list(range(array_pos[0] + array_pos[1]-1, array_pos[0]-1, -1))] \
+            .apply(lambda x: HEX_split(''.join(x)))
         integer = integer.apply(lambda x: int(''.join(x), 2), axis=1).rename("Value").to_frame()
 
     else:
-        integer = filter_data.iloc[:, list(range(array_pos[0], array_pos[0] + array_pos[1]))]
-        integer = integer.apply(lambda x: int(''.join(map(str, x)), 16), axis=1).rename("Value").to_frame()
+        integer = filter_data.iloc[:, list(range(array_pos[0] + array_pos[1]-1, array_pos[0]-1, -1))] \
+            .apply(lambda x: ''.join(map(hex_to_bin, x)), axis=1)
+        integer = integer.apply(lambda x: int(x, 2)).rename("Value").to_frame()
 
     result_data = pd.concat([datetime, integer], axis=1)
 
     return result_data
+
+
+def find_y_lim(data, i, count):
+    mx = data["Value"].max()
+    mn = data["Value"].min()
+    step = mx - mn
+
+    if round(step) == 0:
+        step = 1
+
+    y_max = (count - i - 1) * step + mx
+    y_min = mn - i * step
+
+    return y_max, y_min
+
