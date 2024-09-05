@@ -8,10 +8,10 @@
 import sys
 
 from PySide6.QtCore import (QCoreApplication, QMetaObject, QRect, QSize, Qt)
-from PySide6.QtGui import (QAction, QIcon)
+from PySide6.QtGui import (QAction, QIcon, QPixmap, QColor)
 from PySide6.QtWidgets import (QApplication, QMainWindow, QMenu, QMenuBar,
     QPushButton, QStatusBar, QWidget, QFileDialog, QLabel, QDialog, QHBoxLayout, QVBoxLayout,
-    QScrollArea, QListWidget, QListWidgetItem, QUndoView)
+    QScrollArea, QListWidget, QListWidgetItem)
 
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -19,6 +19,7 @@ from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.ticker import MaxNLocator
 
 from toolbarQT import NavigationToolbar
+
 from settings import *
 from extend import *
 
@@ -71,81 +72,48 @@ class UiMainWindow(object):
         self.widget_tools.setObjectName(u"widget_tools")
         self.widget_tools.setFixedHeight(SIZE_TOOLS_BUTTON+1)
         self.widget_tools.setStyleSheet(u"border-bottom: 1px solid #D0D0D0;")
+        self.widget_tools_layout = QHBoxLayout()
+        self.widget_tools_layout.setContentsMargins(0, 0, 0, 0)
+        self.widget_tools_layout.setAlignment(Qt.AlignmentFlag.AlignLeft)
+        self.widget_tools.setLayout(self.widget_tools_layout)
         self.central_layout.addWidget(self.widget_tools)
 
         ''' Инструменты -> Открыть файл '''
-        self.openFile_tools = QPushButton(self.widget_tools)
+        self.openFile_tools = QPushButton()
         self.openFile_tools.setObjectName(u"openFile_tools")
-        self.openFile_tools.setEnabled(True)
-        self.openFile_tools.setGeometry(QRect(SPACE, -2, SIZE_TOOLS_BUTTON+1, SIZE_TOOLS_BUTTON+1))
-        self.openFile_tools.setAutoFillBackground(True)
-        icon = QIcon(QIcon.fromTheme(QIcon.ThemeIcon.DocumentOpen))
+        self.openFile_tools.setFixedSize(SIZE_TOOLS_BUTTON+1, SIZE_TOOLS_BUTTON+1)
+        icon = QIcon(PATH_ICON + "open_file.png")
         self.openFile_tools.setIcon(icon)
-        self.openFile_tools.setIconSize(QSize(*SIZE_TOOLS_ICON))
-        self.openFile_tools.setAutoDefault(False)
         self.openFile_tools.setFlat(True)
+        self.openFile_tools.setIconSize(QSize(*SIZE_TOOLS_ICON))
         self.openFile_tools.clicked.connect(self.open_file)
+        self.openFile_tools.setToolTip("Открыть файл")
 
         ''' Инструменты -> Сохранить '''
-        self.save_tools = QPushButton(self.widget_tools)
+        self.save_tools = QPushButton()
         self.save_tools.setObjectName(u"save_tools")
-        self.save_tools.setEnabled(True)
-        self.save_tools.setGeometry(QRect(SIZE_TOOLS_BUTTON+SPACE, -2, SIZE_TOOLS_BUTTON+1, SIZE_TOOLS_BUTTON+1))
-        self.save_tools.setAutoFillBackground(True)
-        icon1 = QIcon(QIcon.fromTheme(QIcon.ThemeIcon.DocumentSave))
+        self.save_tools.setFixedSize(SIZE_TOOLS_BUTTON+1, SIZE_TOOLS_BUTTON+1)
+        icon1 = QIcon(PATH_ICON + "save_file.png")
         self.save_tools.setIcon(icon1)
-        self.save_tools.setIconSize(QSize(*SIZE_TOOLS_ICON))
-        self.save_tools.setAutoDefault(False)
         self.save_tools.setFlat(True)
+        self.save_tools.setIconSize(QSize(*SIZE_TOOLS_ICON))
         self.save_tools.clicked.connect(self.save_plot)
+        self.save_tools.setToolTip("Сохранить график")
 
-        ''' Инструменты -> Карандаш '''
-        self.dotPut_tools = QPushButton(self.widget_tools)
-        self.dotPut_tools.setObjectName(u"dotPut_tools")
-        self.dotPut_tools.setEnabled(True)
-        self.dotPut_tools.setGeometry(QRect(SIZE_TOOLS_BUTTON*2+SPACE*3, -2, SIZE_TOOLS_BUTTON+1, SIZE_TOOLS_BUTTON+1))
-        self.dotPut_tools.setAutoFillBackground(True)
-        icon2 = QIcon(QIcon.fromTheme(QIcon.ThemeIcon.MailMessageNew))
-        self.dotPut_tools.setIcon(icon2)
-        self.dotPut_tools.setIconSize(QSize(*SIZE_TOOLS_ICON))
-        self.dotPut_tools.setAutoDefault(False)
-        self.dotPut_tools.setFlat(True)
-        self.dotPut_tools.setCheckable(True)
-        self.dotPut_tools.setStyleSheet(
-            "QPushButton:checked {"
-            "border: 1px  solid #707070;"
-            "background-color: #D0D0D0; }")
-
-        ''' Инструменты -> Переместить '''
-        self.movePlot_tools = QPushButton(self.widget_tools)
-        self.movePlot_tools.setObjectName(u"movePlot_tools")
-        self.movePlot_tools.setEnabled(True)
-        self.movePlot_tools.setGeometry(QRect(SIZE_TOOLS_BUTTON*3+SPACE*3, -2, SIZE_TOOLS_BUTTON+1, SIZE_TOOLS_BUTTON+1))
-        self.movePlot_tools.setAutoFillBackground(True)
-        icon3 = QIcon(QIcon.fromTheme(QIcon.ThemeIcon.DocumentOpenRecent))
-        self.movePlot_tools.setIcon(icon3)
-        self.movePlot_tools.setIconSize(QSize(*SIZE_TOOLS_ICON))
-        self.movePlot_tools.setAutoDefault(False)
-        self.movePlot_tools.setFlat(True)
-        self.movePlot_tools.setCheckable(True)
-        self.movePlot_tools.setStyleSheet(
-            "QPushButton:checked {"
-            "border: 1px solid #707070;"
-            "background-color: #D0D0D0; }")
-
-        ''' Инструменты -> Нарисовать '''
-        self.drawGraph_tools = QPushButton(self.widget_tools)
+        ''' Инструменты -> Обновить '''
+        self.drawGraph_tools = QPushButton()
         self.drawGraph_tools.setObjectName(u"movePlot_tools")
-        self.drawGraph_tools.setEnabled(True)
-        self.drawGraph_tools.setGeometry(
-            QRect(SIZE_TOOLS_BUTTON * 4 + SPACE * 5, -2, SIZE_TOOLS_BUTTON + 1, SIZE_TOOLS_BUTTON + 1))
-        self.drawGraph_tools.setAutoFillBackground(True)
-        icon4 = QIcon(QIcon.fromTheme(QIcon.ThemeIcon.ViewRestore))
+        self.drawGraph_tools.setFixedSize(SIZE_TOOLS_BUTTON+1, SIZE_TOOLS_BUTTON+1)
+        icon4 = QIcon(PATH_ICON + "repeat_draw.png")
         self.drawGraph_tools.setIcon(icon4)
-        self.drawGraph_tools.setIconSize(QSize(*SIZE_TOOLS_ICON))
-        self.drawGraph_tools.setAutoDefault(False)
         self.drawGraph_tools.setFlat(True)
+        self.drawGraph_tools.setIconSize(QSize(*SIZE_TOOLS_ICON))
         self.drawGraph_tools.clicked.connect(self.choose_pgn)
+        self.drawGraph_tools.setToolTip("Построить еще раз")
+
+        self.widget_tools_layout.addWidget(self.openFile_tools, alignment=Qt.AlignmentFlag.AlignBaseline)
+        self.widget_tools_layout.addWidget(self.save_tools, alignment=Qt.AlignmentFlag.AlignBaseline)
+        self.widget_tools_layout.addWidget(self.drawGraph_tools, alignment=Qt.AlignmentFlag.AlignLeft)
 
         ''' Рабочая область '''
         self.workArea = QWidget()
@@ -162,6 +130,7 @@ class UiMainWindow(object):
         self.areaPlot_layout = QVBoxLayout()
         self.areaPlot.setLayout(self.areaPlot_layout)
         self.workArea_layout.addWidget(self.areaPlot)
+
 
         ''' Зона для легенды '''
         self.legendWidget = QWidget()
@@ -220,11 +189,6 @@ class UiMainWindow(object):
 
         self.translate(MainWindow)
 
-        self.openFile_tools.setDefault(False)
-        self.save_tools.setDefault(False)
-        self.dotPut_tools.setDefault(False)
-        self.movePlot_tools.setDefault(False)
-
         QMetaObject.connectSlotsByName(MainWindow)
 
     def translate(self, window):
@@ -237,10 +201,6 @@ class UiMainWindow(object):
         self.actionProperties.setText(QCoreApplication.translate("MainWindow", u"Параметры", None))
         self.actionDefault.setText(QCoreApplication.translate("MainWindow", u"Обычный", None))
         self.actionDark.setText(QCoreApplication.translate("MainWindow", u"Темный", None))
-        self.openFile_tools.setText("")
-        self.save_tools.setText("")
-        self.dotPut_tools.setText("")
-        self.movePlot_tools.setText("")
         self.feedback_label.setText("")
         self.menuFile.setTitle(QCoreApplication.translate("MainWindow", u"Файл", None))
         self.menuHelp.setTitle(QCoreApplication.translate("MainWindow", u"Помощь", None))
@@ -376,14 +336,18 @@ class UiMainWindow(object):
         self.draw_graphs()
 
     def draw_graphs(self):
-
         self.clear_area()
+        try:
+            self.widget_tools_layout.removeWidget(self.toolbar)
+            self.toolbar.deleteLater()
+        except AttributeError:
+            pass
 
-        self.fig, ax = plt.subplots(figsize=(16, 9))
+        self.fig, self.ax = plt.subplots(figsize=(16, 9))
         sns.set()
 
-        canvas = FigureCanvas(self.fig)
-        toolbar = NavigationToolbar(canvas, MainWindow)
+        self.canvas = FigureCanvas(self.fig)
+        self.toolbar = NavigationToolbar(self.canvas, self.widget_tools)
 
         count_graph = sum(SPN_Select.values())
         flag_side = True
@@ -420,20 +384,20 @@ class UiMainWindow(object):
                     ''' Создание основного графа '''
                     sns.lineplot(x=result_data['DateTime'],
                                  y=result_data['Value'],
-                                 ax=ax,
+                                 ax=self.ax,
                                  label=f'{name} ({unit})',
                                  color='C%d' % i,
                                  errorbar=EXTEND_ERRORBAR)
-                    ax.yaxis.set_label_position("left")
-                    ax.yaxis.tick_left()
-                    ax.tick_params(axis='y', colors='C%d' % i, rotation=45)
-                    ax.legend_.remove()
-                    ax.set_label(name)
+                    self.ax.yaxis.set_label_position("left")
+                    self.ax.yaxis.tick_left()
+                    self.ax.tick_params(axis='y', colors='C%d' % i, rotation=45)
+                    self.ax.legend_.remove()
+                    self.ax.set_label(name)
                     y_max, y_min = find_y_lim(result_data, i, count_graph)
-                    ax.set_ylim(y_min, y_max)
+                    self.ax.set_ylim(y_min, y_max)
                 else:
                     ''' Создание накладываемого графа '''
-                    ax_new = ax.twinx()
+                    ax_new = self.ax.twinx()
                     sns.lineplot(x=result_data['DateTime'],
                                  y=result_data['Value'], ax=ax_new,
                                  label=f'{name} ({unit})',
@@ -453,19 +417,19 @@ class UiMainWindow(object):
                     y_max, y_min = find_y_lim(result_data, index_graph, count_graph)
                     ax_new.set_ylim(y_min, y_max)
 
-        ax.set_xlabel('Дата и время', fontsize=10)
-        ax.xaxis.set_major_locator(MaxNLocator(MainWindow.width()//125))
+        self.ax.set_xlabel('Дата и время', fontsize=10)
+        self.ax.xaxis.set_major_locator(MaxNLocator(MainWindow.width()//125))
 
         for ax in self.fig.axes:
             ax.set_xlabel('')
             ax.set_ylabel('')
-            ax.grid(axis='y', visible=True)
+            ax.grid(visible=True)
 
         self.fig.tight_layout()
 
-        self.areaPlot_layout.addWidget(canvas)
-        self.areaPlot_layout.addWidget(toolbar)
         self.feedback_label.setText("График построен")
+        self.areaPlot_layout.addWidget(self.canvas)
+        self.widget_tools_layout.addWidget(self.toolbar)
         self.legend_bar()
 
     def clear_area(self):
@@ -496,19 +460,38 @@ class UiMainWindow(object):
         self.legend_list = QListWidget()
 
         list_name = []
+        i = 0
         for content, selected in SPN_Select.items():
             if selected:
                 line = QListWidgetItem(SPN_Name[content])
+                color = QColor(*COLOR_C[f'C{i}'])
+                pixmap = QPixmap(10, 10)
+                pixmap.fill(color)
+                line.setIcon(QIcon(pixmap))
                 list_name.append(line)
+                i += 1
         for line in list_name[::-1]:
             self.legend_list.addItem(line)
         self.legendWidget_layout.addWidget(self.legend_list)
+        self.legend_list.itemSelectionChanged.connect(self.click_legend)
 
         # self.legend_descript = QLabel()
         # self.legendWidget_layout.addWidget(self.legend_descript)
         # TODO: Доделать легенду, добавить кнопки управления
-        #       Сделать возможность выбора функций и отрисовка выбранных
 
+    def click_legend(self):
+        self.select_graph = self.legend_list.currentItem().text()
+        for ax in self.fig.axes:
+            if self.select_graph not in ax.get_legend_handles_labels()[1][0]:
+                ax.tick_params(axis='y', labelleft=False, labelright=False)
+                ax.grid(visible=False)
+            else:
+                ax.tick_params(axis='y', labelleft=True, labelright=True)
+                ax.grid(visible=True)
+
+        if self.select_graph not in self.ax.get_legend_handles_labels()[1][0]:
+            self.ax.grid(axis='x')
+        self.fig.canvas.draw()
 
 
 if __name__ == "__main__":

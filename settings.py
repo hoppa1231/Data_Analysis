@@ -22,5 +22,7 @@ EXTEND_ERRORBAR = None                  # Отрисовка доверител�
 
 DPI_SAVE = 300                          # Качество сохраненного графика
 
+PATH_ICON = "interface/icon/"
+
 FILE_SPN = ''.join(open(PATH_FILE_SPN).readlines())
 FILE_PGN = ''.join(open(PATH_FILE_PGN).readlines())

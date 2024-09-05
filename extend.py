@@ -1,7 +1,9 @@
+
 import pandas as pd
 import numpy as np
 
 from settings import *
+import matplotlib.colors as color_plt
 
 SPN_Select = {}
 # SPN_Select[SPN] = 1/0
@@ -21,6 +23,7 @@ SPN_Range = {}
 # SPN_Range[SPN] = Value to Value (tuple)
 SPN_Name = {}
 
+COLOR_C = dict([('C%d' % i, list(map(lambda x: x*255, color_plt.ColorConverter().to_rgba('C%d' % i)))) for i in range(20)])
 
 def get_pgn_unique(data):
     """ Функция получения всех уникальных PGN в INTEGER """
@@ -237,3 +240,13 @@ def find_y_lim(data, i, count):
 
     return y_max, y_min
 
+def colorize_text(colour, s):
+    rgb = COLOR_C[colour][:3]
+    buff = f"#{''.join(map(lambda x: format(int(x), '02x'), rgb))}"
+
+    return f"<font color='{buff}' size=4>" + s + "</font>"
+
+def extract_value_message(s: str):
+    time = s[s.rfind('(')+1:s.rfind(',')]
+    values = list(map( lambda x: x[:x.find(')')], s[7:].split(', ') ))
+    return time, values[1:]
