@@ -1,0 +1,3329 @@
+pgn0 - Torque/Speed Control 1 - TSC1 -
+Transmission Repetition Rate: when active; 10 ms to engine - 50 ms to retarder
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 0
+PDU Specific: DA
+Default Priority: 3
+Parameter Group Number: 0 ( 000000 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1.1 2 bits Override Control Mode 695
+1.3 2 bits Requested Speed Control Conditions 696
+1.5 2 bits Override Control Mode Priority 897
+2-3 2 bytes Requested Speed/Speed Limit 898
+4 1 byte Requested Torque/Torque Limit 518
+NOTE - Retarder may be disabled by commanding a torque limit of 0%. Use of the limit mode allows the use of the retarder only up to
+the limit specified in the request. This can be used to permit retarding of up to 50%, for example, if that limit is required by some device
+such as an EBS, or it can disable the use of the retarder by others, as when an ABS controller detects wheel slip.
+
+
+pgn256 - Transmission Control 1 - TC1 -
+Transmission Repetition Rate: when active; 50 ms to transmission and axles
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 1
+PDU Specific: DA
+Default Priority: 3
+Parameter Group Number: 256 ( 000100 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1.1 2 bits Gear Shift Inhibit Request 681
+1.3 2 bits Torque Converter Lockup Disable Request 682
+1.5 2 bits Disengage Driveline Request 683
+2 1 byte Requested Percent Clutch Slip 684
+3 1 byte Requested Gear 525
+4.1 2 bits Disengage Differential Lock Request - Front Axle 1 685
+4.3 2 bits Disengage Differential Lock Request - Front Axle 2 686
+4.5 2 bits Disengage Differential Lock Request - Rear Axle 1 687
+4.7 2 bits Disengage Differential Lock Request - Rear Axle 2 688
+5.1 2 bits Disengage Differential Lock Request - Central 689
+5.3 2 bits Disengage Differential Lock Request - Central Front 690
+5.5 2 bits Disengage Differential Lock Request - Central Rear 691
+6.1 2 bits Transmission Mode 1 1852
+6.3 2 bits Transmission Mode 2 1853
+6.5 2 bits Transmission Mode 3 1854
+6.7 2 bits Transmission Mode 4 1855
+
+
+pgn52992 - Continuous Torque & Speed Limit Request - CTL -
+Transmission Repetition Rate: 5 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 207
+PDU Specific: DA
+Default Priority: 6
+Parameter Group Number: 52992 ( 00CF00 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Minimum Continuous Engine Speed Limit Request 1784
+2 1 byte Maximum Continuous Engine Speed Limit Request 1785
+3 1 byte Minimum Continuous Engine Torque Limit Request 1786
+4 1 byte Maximum Continuous Engine Torque Limit Request 1787
+5 1 byte Minimum Continuous Retarder Speed Limit Request 1788
+6 1 byte Maximum Continuous Retarder Speed Limit Request 1789
+7 1 byte Minimum Continuous Retarder Torque Limit Request 1790
+8 1 byte Maximum Continuous Retarder Torque Limit Request 1791
+
+
+pgn53248 - Cab Illumination Message - CL -
+Transmission Repetition Rate: on change of state, but not faster that 100 ms, and every 5 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 208
+PDU Specific: DA
+Default Priority: 6
+Parameter Group Number: 53248 ( 00D000 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Illumination Brightness Percent 1487
+This message contains information that controls illumination devices inside the vehicle's cab.
+
+
+pgn53504 - Air Suspension Control 6 - ASC6 -
+Transmission Repetition Rate: 100 ms when active
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 209
+PDU Specific: DA
+Default Priority: 3
+Parameter Group Number: 53504 ( 00D100 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Level Preset Front Axle Left 1732
+3-4 2 bytes Level Preset Front Axle Right 1757
+5-6 2 bytes Level Preset Rear Axle Left 1758
+7-8 2 bytes Level Preset Rear Axle Right 1735
+Used for suspension control
+
+
+pgn53760 - Air Suspension Control 2 - ASC2 -
+Transmission Repetition Rate: 100 ms
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 210
+PDU Specific: DA
+Default Priority: 3
+Parameter Group Number: 53760 ( 00D200 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1.3 2 bits Kneeling Request Left Side 1749
+1.5 2 bits Kneeling Request Right Side 1748
+1.7 2 bits Kneeling Control Mode Request 1747
+2.1 4 bits Nominal Level Request Front Axle 1751
+2.5 4 bits Nominal Level Request Rear Axle 1750
+3.1 4 bits Level Control Mode Request 1753
+3.5 2 bits Lift Axle 1 Position Command 1752
+3.7 2 bits Lift Axle 2 Position Command 1828
+4 1 byte Damper Stiffness Request Front Axle 1718
+5 1 byte Damper Stiffness Request Rear Axle 1719
+6 1 byte Damper Stiffness Request Lift / Tag Axle 1720
+7.1 2 bits Kneeling Command - Front Axle 1830
+7.3 2 bits Kneeling Command - Rear Axle 1829
+Used for suspension control
+
+
+pgn54528 - Time/Date Adjust - TDA -
+Transmission Repetition Rate: As needed
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 213
+PDU Specific: DA
+Default Priority: 6
+Parameter Group Number: 54528 ( 00D500 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Adjust seconds 1603
+2 1 byte Adjust minutes 1604
+3 1 byte Adjust hours 1605
+4 1 byte Adjust month 1606
+5 1 byte Adjust day 1607
+6 1 byte Adjust year 1608
+7 1 byte Adjust local minute offset 1609
+8 1 byte Adjust local hour offset 1610
+
+
+pgn56320 - Anti-theft Status - ATS -
+Transmission Repetition Rate: This message is transmitted in response to an Anti-Theft Request message. This message is also sent when the component
+abnormal power interuption. In this situation the Anti-Theft Status Report is sent without the Anti-Theft Request.
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 220
+PDU Specific: DA
+Default Priority: 7
+Parameter Group Number: 56320 ( 00DC00 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1.1 2 bits Anti-theft Encryption Seed Present Indicator 1194
+1.3 2 bits Anti-theft Password Valid Indicator 1195
+1.5 2 bits Anti-theft Component Status States 1196
+1.7 2 bits Anti-theft Modify Password States 1197
+2-8 7 bytes Anti-theft Random Number 1198
+NOTE: See Figures PGN56320_A to PGN56320_F for examples of Anti-theft message transfers. Bit 1 is the right most bit in each
+byte.
+FIGURE PGN56320_A -- OPERATOR DESIRES TO ADD A PASSWORD TO THE COMPONENT�S PASSWORD
+STRUCTURE
+
+
+pgn56576 - Anti-theft Request - ATR -
+Transmission Repetition Rate: Transmission of this message is interrupt driven. This message is also transmitted upon power-up of the interfacing device
+this message.
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 221
+PDU Specific: DA
+Default Priority: 7
+Parameter Group Number: 56576 ( 00DD00 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1.2 2 bits Anti-theft Encryption Indicator States 1199
+1.4 2 bits Anti-theft Desired Exit Mode States 1200
+1.6 3 bits Anti-theft Command States 1201
+2 7 bytes Anti-theft Password Representation 1202
+NOTE: See Figures PGN56320_A to PGN56320_F for examples of Anti-theft message transfers. Bit 1 is the right most bit in each
+byte.
+
+
+pgn56832 - Reset - RESET -
+Transmission Repetition Rate: When needed
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 222
+PDU Specific: DA
+Default Priority: 7
+Parameter Group Number: 56832 ( 00DE00 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1.1 2 bits Trip Group 1 988
+1.3 2 bits Trip Group 2 - Proprietary 989
+2 1 byte Service Component Identification 1584
+3.1 2 bits Engine Build Hours Reset 1211
+NOTE: This message requires an Acknowledgement response (See J1939-21, PGN 59392) from the receiving node. The use of
+individual proprietary protocols can still be used instead of the "trip reset" PGN to maintain security.
+
+
+pgn57344 - Cab Message 1 - CM1 -
+Transmission Repetition Rate: 1 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 224
+PDU Specific: DA
+Default Priority: 6
+Parameter Group Number: 57344 ( 00E000 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Requested Percent Fan Speed 986
+2-3 2 bytes Cab Interior Temperature Command 1691
+4.1 2 bits Auxiliary Heater Coolant Pump Request 1684
+4.3 2 bits Battery Main Switch Hold Request 1682
+4.5 2 bits Operator Seat Direction Switch 1714
+4.7 2 bits Seat Belt Switch 1856
+5.3 2 bits Vehicle Limiting Speed Governor Decrement Switch 1655
+5.5 2 bits Vehicle Limiting Speed Governor Increment Switch 1654
+
+
+pgn61440 - Electronic Retarder Controller 1 - ERC1 -
+Transmission Repetition Rate: 100 ms
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 240
+PDU Specific: 0
+Default Priority: 6
+Parameter Group Number: 61440 ( 00F000 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1.1 4 bits Retarder Torque Mode 900
+1.5 2 bits Retarder Enable - Brake Assist Switch 571
+1.7 2 bits Retarder Enable - Shift Assist Switch 572
+2 1 byte Actual Retarder - Percent Torque 520
+3 1 byte Intended Retarder Percent Torque 1085
+4.1 2 bits Engine Coolant Load Increase 1082
+4.3 2 bits Retarder Requesting Brake Light 1667
+5 1 byte Source Address of Controlling Device for Retarder Control 1480
+6 1 byte Drivers Demand Retarder - Percent Torque 1715
+7 1 byte Retarder Selection, non-engine 1716
+8 1 byte Actual Maximum Available Retarder - Percent Torque 1717
+NOTE- This message will be transmitted by several types of retarding devices such as engine compression release brakes, exhaust
+system restriction brakes, and driveline retarders using hydraulic, electric, or mechanical friction to slow the vehicle. The source
+address of the message will indicate which one, and the type and location of the retarder are available in the Retarder Configuration
+Message (see PGN 65249) if that detail is important to the receiver. Users should also be aware that the Shift Assist and Brake Assist
+switch status in the first byte of this message are to be used by other ECUs that might request retarding force from the retarder to know
+when such assistance is available. The state of the 'switches' will NOT prevent the retarder from activating if requested, but should be
+honored by the requester (by not sending a request when the appropriate 'switch' is not enabled) to prevent unwarranted noise.
+
+
+pgn61441 - Electronic Brake Controller 1 - EBC1 -
+Transmission Repetition Rate: 100 ms
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 240
+PDU Specific: 1
+Default Priority: 6
+Parameter Group Number: 61441 ( 00F001 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1.1 2 bits ASR Engine Control Active 561
+1.3 2 bits ASR Brake Control Active 562
+1.5 2 bits Anti-Lock Braking (ABS) Active 563
+1.7 2 bits EBS Brake Switch 1121
+2 1 byte Brake Pedal Position 521
+3.1 2 bits ABS Off-road Switch 575
+3.3 2 bits ASR Off-road Switch 576
+3.5 2 bits ASR "Hill Holder" Switch 577
+3.7 2 bits Traction Control Override Switch 1238
+4.1 2 bits Accelerator Interlock Switch 972
+4.3 2 bits Engine Derate Switch 971
+4.5 2 bits Auxiliary Engine Shutdown Switch 970
+4.7 2 bits Remote Accelerator Enable Switch 969
+5 1 byte Engine Retarder Selection 973
+6.1 2 bits ABS Fully Operational 1243
+6.3 2 bits EBS Red Warning Signal 1439
+6.5 2 bits ABS/EBS Amber Warning Signal (Powered Vehicle) 1438
+6.7 2 bits ATC/ASR Information Signal 1793
+7 1 byte Source Address of Controlling Device for Brake Control 1481
+8.5 2 bits Trailer ABS Status 1836
+8.7 2 bits Tractor-Mounted Trailer ABS Warning Signal 1792
+Used for brake control information
+
+
+pgn61442 - Electronic Transmission Controller 1 - ETC1 -
+Transmission Repetition Rate: 10 ms
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 240
+PDU Specific: 2
+Default Priority: 3
+Parameter Group Number: 61442 ( 00F002 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1.1 2 bits Driveline Engaged 560
+1.3 2 bits Torque Converter Lockup Engaged 573
+1.5 2 bits Shift In Process 574
+2-3 2 bytes Output Shaft Speed 191
+4 1 byte Percent Clutch Slip 522
+5.1 2 bits Momentary Engine Overspeed Enable 606
+5.3 2 bits Progressive Shift Disable 607
+6-7 2 bytes Input Shaft Speed 161
+8 1 byte Source Address of Controlling Device for Transmission Control 1482
+
+
+pgn61443 - Electronic Engine Controller 2 - EEC2 -
+Transmission Repetition Rate: 50 ms
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 240
+PDU Specific: 3
+Default Priority: 3
+Parameter Group Number: 61443 ( 00F003 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1.1 2 bits Accelerator Pedal 1 Low Idle Switch 558
+1.3 2 bits Accelerator Pedal Kickdown Switch 559
+1.5 2 bits Road Speed Limit Status 1437
+2 1 byte Accelerator Pedal Position 1 91
+3 1 byte Percent Load At Current Speed 92
+4 1 byte Remote Accelerator Pedal Position 974
+
+
+pgn61444 - Electronic Engine Controller 1 - EEC1 -
+Transmission Repetition Rate: engine speed dependent
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 240
+PDU Specific: 4
+Default Priority: 3
+Parameter Group Number: 61444 ( 00F004 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1.1 4 bits Engine Torque Mode 899
+2 1 byte Driver's Demand Engine - Percent Torque 512
+3 1 byte Actual Engine - Percent Torque 513
+4-5 2 bytes Engine Speed 190
+6 1 byte Source Address of Controlling Device for Engine Control 1483
+7.1 4 bits Engine Starter Mode 1675
+8 1 byte Engine Demand - Percent Torque 2432
+Engine related parameters
+
+
+pgn61445 - Electronic Transmission Controller 2 - ETC2 -
+Transmission Repetition Rate: 100 ms
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 240
+PDU Specific: 5
+Default Priority: 6
+Parameter Group Number: 61445 ( 00F005 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Selected Gear 524
+2-3 2 bytes Actual Gear Ratio 526
+4 1 byte Current Gear 523
+5-6 2 bytes Transmission Requested Range 162
+
+
+pgn61446 - Electronic Axle Controller 1 - EAC1 -
+Transmission Repetition Rate: 500 ms
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 240
+PDU Specific: 6
+Default Priority: 6
+Parameter Group Number: 61446 ( 00F006 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 8 bits Location 927
+2.1 2 bits Differential Lock State - Front Axle 1 567
+2.3 2 bits Differential Lock State - Front Axle 2 568
+2.5 2 bits Differential Lock State - Rear Axle 1 569
+2.7 2 bits Differential Lock State - Rear Axle 2 570
+3.1 2 bits Differential Lock State - Central 564
+3.3 2 bits Differential Lock State - Central Front 565
+3.5 2 bits Differential Lock State - Central Rear 566
+NOTE: Request has to be responded to with as many messages as necessary to transmit all available information.
+
+
+pgn61447 - Forward Lane Image urgent msg - FLI1 -
+Transmission Repetition Rate: 50 ms (only when active)
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 240
+PDU Specific: 7
+Default Priority: 4
+Parameter Group Number: 61447 ( 00F007 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1.5 2 bits Lane Departure Imminent, Right Side 1701
+1.7 2 bits Lane Departure Imminent, Left Side 1700
+
+
+pgn61448 - Hydraulic Pressure Governor Info - HPG -
+Transmission Repetition Rate: 50 ms
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 240
+PDU Specific: 8
+Default Priority: 6
+Parameter Group Number: 61448 ( 00F008 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Hydraulic Pressure 1762
+3.1 2 bits Hydraulic Pressure Mode Indicator 1763
+3.3 2 bits Hydraulic Pressure Governor Switch 1764
+3.5 2 bits Fire Apparatus Pump Engagement 2599
+Information to be used for a hydraulic pressure governing control system
+
+
+pgn61449 - Vehicle Dynamic Stability Control 2 - VDC2 -
+Transmission Repetition Rate: 10 ms
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 240
+PDU Specific: 9
+Default Priority: 6
+Parameter Group Number: 61449 ( 00F009 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Steering Wheel Angle 1807
+3.1 6 bits Steering Wheel Turn Counter 1811
+3.7 2 bits Steering Wheel Angle Sensor Type 1812
+4-5 2 bytes Yaw Rate 1808
+6-7 2 bytes Lateral Acceleration 1809
+8 1 byte Longitudinal Acceleration 1810
+Contains information which relates to the vehicle's movement.
+
+
+pgn61450 - Engine Gas Flow Rate - EGF1 -
+Transmission Repetition Rate: 50 ms
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 240
+PDU Specific: 10
+Default Priority: 3
+Parameter Group Number: 61450 ( 00F00A 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes EGR Mass Flow Rate 2659
+3-4 2 bytes Inlet Air Mass Flow Rate 132
+Flow rates of Air and mixed gasses into the engine cylinders.
+
+
+pgn64977 - FMS-standard Interface Identity/Capabilities - FMS -
+Transmission Repetition Rate: 10 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 253
+PDU Specific: 209
+Default Priority: 7
+Parameter Group Number: 64977 ( 00FDD1 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1.1 2 bits FMS-standard Diagnostics Supported 2804
+1.3 2 bits FMS-standard Requests Supported 2805
+2-5 4 bytes FMS-standard SW-version supported. 2806
+Information which specifies the capabilities of the Fleet Management System (FMS) - standard interface device. This PGN typically is
+sourced from the network interconnect FMS - standard interface device.
+
+
+pgn64978 - ECU Performance - EP -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 253
+PDU Specific: 210
+Default Priority: 6
+Parameter Group Number: 64978 ( 00FDD2 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Keep-Alive Battery Consumption 2803
+3 1 byte Data Memory Usage 2802
+Message used to transfer ECU performance parameters.
+
+
+pgn64979 - Turbocharger Information 6 - TCI6 -
+Transmission Repetition Rate: 1 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 253
+PDU Specific: 211
+Default Priority: 6
+Parameter Group Number: 64979 ( 00FDD3 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Turbocharger 1 Compressor Outlet Temperature 2629
+3-4 2 bytes Turbocharger 2 Compressor Outlet Temperature 2799
+5-6 2 bytes Turbocharger 3 Compressor Outlet Temperature 2800
+7-8 2 bytes Turbocharger 4 Compressor Outlet Temperature 2801
+Turbocharger Compressor Outlet Discharge Temperature
+
+
+pgn64980 - Cab Message 3 - CM3 -
+Transmission Repetition Rate: On-change or every 10 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 253
+PDU Specific: 212
+Default Priority: 6
+Parameter Group Number: 64980 ( 00FDD4 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1.1 3 bits Transfer Case Selector Switch 2796
+Provides information from Cab mounted operator inputs.
+
+
+pgn64981 - Electronic Engine Controller 5 - EEC5 -
+
+
+pgn64982 - Basic Joystick Message 1 - BJM1 -
+Transmission Repetition Rate: 100 ms or on change, not to exceed 20 ms
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 253
+PDU Specific: 214
+Default Priority: 3
+Parameter Group Number: 64982 ( 00FDD6 )
+16
+Bit Start Position /Bytes Length SPN Description SPN
+1.1 2 bits Joystick 1 X-Axis Neutral Position Status 2675
+1.3 2 bits Joystick 1 X-Axis Lever Left Negative Position Status 2670
+1.5 2 bits Joystick 1 X-Axis Lever Right Positive Position Status 2665
+1.7-2 10 bits Joystick 1 X-Axis Position 2660
+3.1 2 bits Joystick 1 Y-Axis Neutral Position Status 2676
+3.3 2 bits Joystick 1 Y-Axis Lever Back Negative Position Status 2671
+3.5 2 bits Joystick 1 Y-Axis Lever Forward Positive Position Status 2666
+3.7-4 10 bits Joystick 1 Y-Axis Position 2661
+5.5 2 bits Joystick 1 Y-Axis Detent Position Status 2681
+5.7 2 bits Joystick 1 X-Axis Detent Position Status 2680
+6.1 2 bits Joystick 1 Button 4 Pressed Status 2688
+6.3 2 bits Joystick 1 Button 3 Pressed Status 2687
+6.5 2 bits Joystick 1 Button 2 Pressed Status 2686
+6.7 2 bits Joystick 1 Button 1 Pressed Status 2685
+7.1 2 bits Joystick 1 Button 8 Pressed Status 2692
+7.3 2 bits Joystick 1 Button 7 Pressed Status 2691
+7.5 2 bits Joystick 1 Button 6 Pressed Status 2690
+7.7 2 bits Joystick 1 Button 5 Pressed Status 2689
+8.1 2 bits Joystick 1 Button 12 Pressed Status 2696
+8.3 2 bits Joystick 1 Button 11 Pressed Status 2695
+8.5 2 bits Joystick 1 Button 10 Pressed Status 2694
+8.7 2 bits Joystick 1 Button 9 Pressed Status 2693
+Used to transfer information about the measured status of the 1st 2 axes and up to 12 buttons of a joystick. Additional handle
+information is available in the Expanded Joystick Message.
+10-bit position parameters are broadcast over 2 bytes. The eight most significant bits are transmitted in the second byte, with the
+most significant bit at bit 8. The two least significant bits are transmitted in the first byte in bit positions 7 and 8, with the most
+significant of the two bits at bit 8.
+10-bit position SPN Location in PGN
+Bit 10 Byte n Bit 8
+Bit 9 Bit 7
+Bit 8 Bit 6
+Bit 7 Bit 5
+Bit 6 Bit 4
+Bit 5 Bit 3
+Bit 4 Bit 2
+Bit 3 Bit 1
+Bit 2 Byte (n-1) Bit 8
+Bit 1 Bit 7
+
+
+pgn64983 - Extended Joystick Message 1 - EJM1 -
+Transmission Repetition Rate: 100 ms or on change, not to exceed 20 ms
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 253
+PDU Specific: 215
+Default Priority: 3
+Parameter Group Number: 64983 ( 00FDD7 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1.1 2 bits Joystick 1 Grip X-Axis Neutral Position Status 2677
+1.3 2 bits Joystick 1 Grip X-Axis Lever Left Negative Position Status 2672
+1.5 2 bits Joystick 1 Grip X-Axis Lever Right Positive Position Status 2667
+1.7-2 10 bits Joystick 1 Grip X-Axis Position 2662
+3.1 2 bits Joystick 1 Grip Y-Axis Neutral Position Status 2678
+3.3 2 bits Joystick 1 Grip Y-Axis Lever Back Negative Position Status 2673
+3.5 2 bits Joystick 1 Grip Y-Axis Lever Forward Positive Position Status 2668
+3.7-4 10 bits Joystick 1 Grip Y-Axis Position 2663
+5.1 2 bits Joystick 1 Theta-Axis Neutral Position Status 2679
+5.3 2 bits Joystick 1 Theta-Axis Counter Clockwise Negative Position Status 2674
+5.5 2 bits Joystick 1 Theta-Axis Clockwise Positive Position Status 2669
+5.7-6 10 bits Joystick 1 Theta-Axis Position 2664
+7.3 2 bits Joystick 1 Theta-Axis Detent Position Status 2684
+7.5 2 bits Joystick 1 Grip Y-Axis Detent Position Status 2683
+7.7 2 bits Joystick 1 Grip X-Axis Detent Position Status 2682
+Used to transfer information about the measured status of three additional axes of a joystick and switches of the joystick grip or
+handle. The joystick axial motion information is available in the Basic Joystick Message.
+10-bit position parameters are broadcast over 2 bytes. The eight most significant bits are transmitted in the second byte, with the
+most significant bit at bit 8. The two least significant bits are transmitted in the first byte in bit positions 7 and 8, with the most
+significant of the two bits at bit 8.
+10-bit position SPN Location in PGN
+Bit 10 Byte n Bit 8
+Bit 9 Bit 7
+Bit 8 Bit 6
+Bit 7 Bit 5
+Bit 6 Bit 4
+Bit 5 Bit 3
+Bit 4 Bit 2
+Bit 3 Bit 1
+Bit 2 Byte (n-1) Bit 8
+Bit 1 Bit 7
+Note: The term Grip used here simply refers to another set of axes separate from the previously mentioned X and Y Axis. This
+additional set of axes could in some cases be grip mounted sensors as opposed to the sensors mounted at the base of the handle.
+
+
+pgn64984 - Basic Joystick Message 2 - BJM2 -
+Transmission Repetition Rate: 100 ms or on change, not to exceed 20 ms
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 253
+PDU Specific: 216
+Default Priority: 3
+Parameter Group Number: 64984 ( 00FDD8 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1.1 2 bits Joystick 2 X-Axis Neutral Position Status 2712
+1.3 2 bits Joystick 2 X-Axis Lever Left Negative Position Status 2707
+1.5 2 bits Joystick 2 X-Axis Lever Right Positive Position Status 2702
+1.7-2 10 bits Joystick 2 X-Axis Position 2697
+3.1 2 bits Joystick 2 Y-Axis Neutral Position Status 2713
+3.3 2 bits Joystick 2 Y-Axis Lever Back Negative Position Status 2708
+3.5 2 bits Joystick 2 Y-Axis Lever Forward Positive Position Status 2703
+3.7-4 10 bits Joystick 2 Y-Axis Position 2698
+5.5 2 bits Joystick 2 Y-Axis Detent Position Status 2718
+5.7 2 bits Joystick 2 X-Axis Detent Position Status 2717
+6.1 2 bits Joystick 2 Button 4 Pressed Status 2725
+6.3 2 bits Joystick 2 Button 3 Pressed Status 2724
+6.5 2 bits Joystick 2 Button 2 Pressed Status 2723
+6.7 2 bits Joystick 2 Button 1 Pressed Status 2722
+7.1 2 bits Joystick 2 Button 8 Pressed Status 2729
+7.3 2 bits Joystick 2 Button 7 Pressed Status 2728
+7.5 2 bits Joystick 2 Button 6 Pressed Status 2727
+7.7 2 bits Joystick 2 Button 5 Pressed Status 2726
+8.1 2 bits Joystick 2 Button 12 Pressed Status 2733
+8.3 2 bits Joystick 2 Button 11 Pressed Status 2732
+8.5 2 bits Joystick 2 Button 10 Pressed Status 2731
+8.7 2 bits Joystick 2 Button 9 Pressed Status 2730
+Used to transfer information about the measured status of the 1st 2 axes and up to 12 buttons of a joystick. Additional handle
+information is available in the Expanded Joystick Message.
+10-bit position parameters are broadcast over 2 bytes. The eight most significant bits are transmitted in the second byte, with the
+most significant bit at bit 8. The two least significant bits are transmitted in the first byte in bit positions 7 and 8, with the most
+significant of the two bits at bit 8.
+10-bit position SPN Location in PGN
+Bit 10 Byte n Bit 8
+Bit 9 Bit 7
+Bit 8 Bit 6
+Bit 7 Bit 5
+Bit 6 Bit 4
+Bit 5 Bit 3
+Bit 4 Bit 2
+Bit 3 Bit 1
+Bit 2 Byte (n-1) Bit 8
+Bit 1 Bit 7
+
+
+pgn64985 - Extended Joystick Message 2 - EJM2 -
+Transmission Repetition Rate: 100 ms or on change, not to exceed 20 ms
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 253
+PDU Specific: 217
+Default Priority: 3
+Parameter Group Number: 64985 ( 00FDD9 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1.1 2 bits Joystick 2 Grip X-Axis Neutral Position Status 2714
+1.3 2 bits Joystick 2 Grip X-Axis Lever Left Negative Position Status 2709
+1.5 2 bits Joystick 2 Grip X-Axis Lever Right Positive Position Status 2704
+1.7-2 10 bits Joystick 2 Grip X-Axis Position 2699
+3.1 2 bits Joystick 2 Grip Y-Axis Neutral Position Status 2715
+3.3 2 bits Joystick 2 Grip Y-Axis Lever Back Negative Position Status 2710
+3.5 2 bits Joystick 2 Grip Y-Axis Lever Forward Positive Position Status 2705
+3.7-4 10 bits Joystick 2 Grip Y-Axis Position 2700
+5.1 2 bits Joystick 2 Theta-Axis Neutral Position Status 2716
+5.3 2 bits Joystick 2 Theta-Axis Counter Clockwise Negative Position Status 2711
+5.5 2 bits Joystick 2 Theta-Axis Clockwise Positive Position Status 2706
+5.7-6 10 bits Joystick 2 Theta-Axis Position 2701
+7.3 2 bits Joystick 2 Theta-Axis Detent Position Status 2721
+7.5 2 bits Joystick 2 Grip Y-Axis Detent Position Status 2720
+7.7 2 bits Joystick 2 Grip X-Axis Detent Position Status 2719
+Used to transfer information about the measured status of three additional axes of a joystick and switches of the joystick grip or
+handle. The joystick axial motion information is available in the Basic Joystick Message.
+10-bit position parameters are broadcast over 2 bytes. The eight most significant bits are transmitted in the second byte, with the
+most significant bit at bit 8. The two least significant bits are transmitted in the first byte in bit positions 7 and 8, with the most
+significant of the two bits at bit 8.
+10-bit position SPN Location in PGN
+Bit 10 Byte n Bit 8
+Bit 9 Bit 7
+Bit 8 Bit 6
+Bit 7 Bit 5
+Bit 6 Bit 4
+Bit 5 Bit 3
+Bit 4 Bit 2
+Bit 3 Bit 1
+Bit 2 Byte (n-1) Bit 8
+Bit 1 Bit 7
+Note: The term Grip used here simply refers to another set of axes separate from the previously mentioned X and Y Axis. This
+additional set of axes could in some cases be grip mounted sensors as opposed to the sensors mounted at the base of the handle.
+
+
+pgn64986 - Basic Joystick Message 3 - BJM3 -
+Transmission Repetition Rate: 100 ms or on change, not to exceed 20 ms
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 253
+PDU Specific: 218
+Default Priority: 3
+Parameter Group Number: 64986 ( 00FDDA 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1.1 2 bits Joystick 3 X-Axis Neutral Position Status 2749
+1.3 2 bits Joystick 3 X-Axis Lever Left Negative Position Status 2744
+1.5 2 bits Joystick 3 X-Axis Lever Right Positive Position Status 2739
+1.7-2 10 bits Joystick 3 X-Axis Position 2734
+3.1 2 bits Joystick 3 Y-Axis Neutral Position Status 2750
+3.3 2 bits Joystick 3 Y-Axis Lever Back Negative Position Status 2745
+3.5 2 bits Joystick 3 Y-Axis Lever Forward Positive Position Status 2740
+3.7-4 10 bits Joystick 3 Y-Axis Position 2735
+5.5 2 bits Joystick 3 Y-Axis Detent Position Status 2755
+5.7 2 bits Joystick 3 X-Axis Detent Position Status 2754
+6.1 2 bits Joystick 3 Button 4 Pressed Status 2762
+6.3 2 bits Joystick 3 Button 3 Pressed Status 2761
+6.5 2 bits Joystick 3 Button 2 Pressed Status 2760
+6.7 2 bits Joystick 3 Button 1 Pressed Status 2759
+7.1 2 bits Joystick 3 Button 8 Pressed Status 2766
+7.3 2 bits Joystick 3 Button 7 Pressed Status 2765
+7.5 2 bits Joystick 3 Button 6 Pressed Status 2764
+7.7 2 bits Joystick 3 Button 5 Pressed Status 2763
+8.1 2 bits Joystick 3 Button 12 Pressed Status 2770
+8.3 2 bits Joystick 3 Button 11 Pressed Status 2769
+8.5 2 bits Joystick 3 Button 10 Pressed Status 2768
+8.7 2 bits Joystick 3 Button 9 Pressed Status 2767
+Used to transfer information about the measured status of the 1st 2 axes and up to 12 buttons of a joystick. Additional handle
+information is available in the Expanded Joystick Message.
+10-bit position parameters are broadcast over 2 bytes. The eight most significant bits are transmitted in the second byte, with the
+most significant bit at bit 8. The two least significant bits are transmitted in the first byte in bit positions 7 and 8, with the most
+significant of the two bits at bit 8.
+10-bit position SPN Location in PGN
+Bit 10 Byte n Bit 8
+Bit 9 Bit 7
+Bit 8 Bit 6
+Bit 7 Bit 5
+Bit 6 Bit 4
+Bit 5 Bit 3
+Bit 4 Bit 2
+Bit 3 Bit 1
+Bit 2 Byte (n-1) Bit 8
+Bit 1 Bit 7
+
+
+pgn64987 - Extended Joystick Message 3 - EJM3 -
+Transmission Repetition Rate: 100 ms or on change, not to exceed 20 ms
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 253
+PDU Specific: 219
+Default Priority: 3
+Parameter Group Number: 64987 ( 00FDDB 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1.1 2 bits Joystick 3 Grip X-Axis Neutral Position Status 2751
+1.3 2 bits Joystick 3 Grip X-Axis Lever Left Negative Position Status 2746
+1.5 2 bits Joystick 3 Grip X-Axis Lever Right Positive Position Status 2741
+1.7-2 10 bits Joystick 3 Grip X-Axis Position 2736
+3.1 2 bits Joystick 3 Grip Y-Axis Neutral Position Status 2752
+3.3 2 bits Joystick 3 Grip Y-Axis Lever Back Negative Position Status 2747
+3.5 2 bits Joystick 3 Grip Y-Axis Lever Forward Positive Position Status 2742
+3.7-4 10 bits Joystick 3 Grip Y-Axis Position 2737
+5.1 2 bits Joystick 3 Theta-Axis Neutral Position Status 2753
+5.3 2 bits Joystick 3 Theta-Axis Counter Clockwise Negative Position Status 2748
+5.5 2 bits Joystick 3 Theta-Axis Clockwise Positive Position Status 2743
+5.7-6 10 bits Joystick 3 Theta-Axis Position 2738
+7.3 2 bits Joystick 3 Theta-Axis Detent Position Status 2758
+7.5 2 bits Joystick 3 Grip Y-Axis Detent Position Status 2757
+7.7 2 bits Joystick 3 Grip X-Axis Detent Position Status 2756
+Used to transfer information about the measured status of three additional axes of a joystick and switches of the joystick grip or
+handle. The joystick axial motion information is available in the Basic Joystick Message.
+10-bit position parameters are broadcast over 2 bytes. The eight most significant bits are transmitted in the second byte, with the
+most significant bit at bit 8. The two least significant bits are transmitted in the first byte in bit positions 7 and 8, with the most
+significant of the two bits at bit 8.
+10-bit position SPN Location in PGN
+Bit 10 Byte n Bit 8
+Bit 9 Bit 7
+Bit 8 Bit 6
+Bit 7 Bit 5
+Bit 6 Bit 4
+Bit 5 Bit 3
+Bit 4 Bit 2
+Bit 3 Bit 1
+Bit 2 Byte (n-1) Bit 8
+Bit 1 Bit 7
+Note: The term Grip used here simply refers to another set of axes separate from the previously mentioned X and Y Axis. This
+additional set of axes could in some cases be grip mounted sensors as opposed to the sensors mounted at the base of the handle.
+
+
+pgn64988 - Marine Control Information - MCI -
+Transmission Repetition Rate: 1 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 253
+PDU Specific: 220
+Default Priority: 6
+Parameter Group Number: 64988 ( 00FDDC 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1.1 4 bits Throttle Synchronization Mode Status 2615
+1.5 2 bits Trolling Mode Status 2616
+1.7 2 bits Slow Vessel Mode Status 2617
+This messages contains marine vessel control information for the engine
+
+
+pgn64991 - Front Wheel Drive Status - FWD -
+Transmission Repetition Rate: 0.5 s
+Data Length: 8 bytes
+Data Page: 0
+
+
+pgn64992 - Ambient Conditions 2 - AMB2 -
+Transmission Repetition Rate: 1 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 253
+PDU Specific: 224
+Default Priority: 6
+Parameter Group Number: 64992 ( 00FDE0 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Solar Intensity Percent 2610
+2 1 byte Solar Sensor Maximum 2611
+This message contains measurement and configuration information about the vehicle ambient conditions.
+
+
+pgn64993 - Cab A/C Climate System Information - CACI -
+Transmission Repetition Rate: 1 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 253
+PDU Specific: 225
+Default Priority: 6
+Parameter Group Number: 64993 ( 00FDE1 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Cab A/C Refrigerant Compressor Outlet Pressure 2609
+This message contains measurement and condition information from cab air conditioning components.
+
+
+pgn64994 - Supply Pressure Demand - SPR -
+Transmission Repetition Rate: 1 s, when active
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 253
+PDU Specific: 226
+Default Priority: 6
+Parameter Group Number: 64994 ( 00FDE2 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Pneumatic Supply Pressure Request 2603
+2 1 byte Parking and/or Trailer Air Pressure Request 2604
+3 1 byte Service Brake Air Pressure Request, Circuit #1 2605
+4 1 byte Service Brake Air Pressure Request, Circuit #2 2606
+5 1 byte Auxiliary Equipment Supply Pressure Request 2607
+6 1 byte Air Suspension Supply Pressure Request 2608
+Used for controlling the supply pressure. Often used to raise the pressure of a supply pressure circuit in situations where more
+pneumatic energy is needed. This message is the setpoint for the PGN 65198 message.
+
+
+pgn64995 - Equipment Operation and Control - EOAC -
+Transmission Repetition Rate: 250 mS
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 253
+PDU Specific: 227
+Default Priority: 6
+Parameter Group Number: 64995 ( 00FDE3 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Travel Velocity Control Position 2601
+Parameters related to the operation and controls for equipment
+
+
+pgn64996 - Equipment Performance Data - EPD -
+Transmission Repetition Rate: 500 mS
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 253
+PDU Specific: 228
+Default Priority: 6
+Parameter Group Number: 64996 ( 00FDE4 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Payload Percentage 2600
+Parameters related to the performance characteristics of equipment
+
+
+pgn64997 - Maximum Vehicle Speed Limit Status - MVS -
+Transmission Repetition Rate: 1 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 253
+PDU Specific: 229
+Default Priority: 6
+Parameter Group Number: 64997 ( 00FDE5 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Maximum Vehicle Speed Limit 1 2588
+2 1 byte Maximum Vehicle Speed Limit 2 2589
+3 1 byte Maximum Vehicle Speed Limit 3 2590
+4 1 byte Maximum Vehicle Speed Limit 4 2591
+5 1 byte Maximum Vehicle Speed Limit 5 2592
+6 1 byte Maximum Vehicle Speed Limit 6 2593
+7 1 byte Maximum Vehicle Speed Limit 7 2594
+8 1 byte Applied Vehicle Speed Limit 2595
+Reports the possible maximum vehicle speed limits, one through seven, and the applied maximum vehicle speed limit.
+
+
+pgn64998 - Hydraulic Braking System - HBS -
+Transmission Repetition Rate: 100 ms
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 253
+PDU Specific: 230
+Default Priority: 3
+Parameter Group Number: 64998 ( 00FDE6 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Hydraulic Brake Pressure Circuit 1 2580
+2 1 byte Hydraulic Brake Pressure Circuit 2 2581
+3.1 2 bits Hydraulic Brake Pressure Warning State Circuit 1 2584
+3.3 2 bits Hydraulic Brake Pressure Warning State Circuit 2 2585
+3.5 2 bits Hydraulic Brake Pressure Supply State Circuit 1 2582
+3.7 2 bits Hydraulic Brake Pressure Supply State Circuit 2 2583
+Used for information on a hydraulic brake system. As an example: this PGN may be used for a two circuit hydraulic brake system with
+separate circuits for front and rear axle. The hydraulic energy is supplied via two independent electrically driven pumps. The energy is
+stored in gas filled hydraulic accumulators also separated for each circuit.
+
+
+pgn65031 - Exhaust Temperature - ET -
+Transmission Repetition Rate: 0.5 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 7
+Default Priority: 6
+Parameter Group Number: 65031 ( 00FE07 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Right Manifold Exhaust Gas Temperature 2433
+3-4 2 bytes Left Manifold Exhaust Gas Temperature 2434
+
+
+pgn65088 - Lighting Data - LD -
+Transmission Repetition Rate: As requested.
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 64
+Default Priority: 6
+Parameter Group Number: 65088 ( 00FE40 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1.1 2 bits Running Light 2404
+
+
+pgn65089 - Lighting Command - LC -
+Transmission Repetition Rate: On change of lamp on/ off state. Maximum period of 1 second between messages. No greater than 10 messages per second
+lights.
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 65
+Default Priority: 3
+Parameter Group Number: 65089 ( 00FE41 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1.1 2 bits Running Light Command 2403
+1.3 2 bits Alternate Beam Head Light Command 2351
+1.5 2 bits Low Beam Head Light Command 2349
+1.7 2 bits High Beam Head Light Command 2347
+2.1 2 bits Tractor Front Fog Lights Command 2387
+2.3 2 bits Rotating Beacon Light Command 2385
+2.5 2 bits Right Turn Signal Lights Command 2369
+2.7 2 bits Left Turn Signal Lights Command 2367
+3.1 2 bits Back Up Light and Alarm Horn Command 2391
+3.3 2 bits Center Stop Light Command 2375
+3.5 2 bits Right Stop Light Command 2373
+3.7 2 bits Left Stop Light Command 2371
+4.1 2 bits Implement Clearance Light Command 2383
+4.3 2 bits Tractor Clearance Light Command 2381
+4.5 2 bits Implement Marker Light Command 2379
+4.7 2 bits Tractor Marker Light Command 2377
+5.1 2 bits Rear Fog Light Command 2389
+5.3 2 bits Tractor Underside Mounted Work Lights Command 2357
+5.5 2 bits Tractor Rear Low Mounted Work Lights Command 2359
+5.7 2 bits Tractor Rear High Mounted Work Lights Command 2361
+6.1 2 bits Tractor Side Low Mounted Work Lights Command 2363
+6.3 2 bits Tractor Side High Mounted Work Lights Command 2365
+6.5 2 bits Tractor Front Low Mounted Work Lights Command 2353
+6.7 2 bits Tractor Front High Mounted Work Lights Command 2355
+7.1 2 bits Implement OEM Option 2 Light Command 2397
+7.3 2 bits Implement OEM Option 1 Light Command 2395
+7.5 2 bits Implement Right Facing Work Light Command 2406
+7.7 2 bits Implement Left Facing Work Light Command 2597
+8.1 2 bits Lighting Data Request Command 2393
+8.3 2 bits Implement Right Forward Work Light Command 2401
+8.5 2 bits Implement Left Forward Work Light Command 2399
+8.7 2 bits Implement Rear Work Light Command 2405
+The lighting command message has been defined as a global message from the tractor to all lighting controllers on the tractor and
+attached implements. Separate messages are provided for tractor and implement work and driving lights. Additional commands have
+been provided for 3 optional lights on implements to meet the needs of speciality equipment. Common marking and signaling messages
+are provided. This message is used to control the state of all lighting functions. The lighting command message shall be sent on each
+change of state of a lamp. The state values indicate the lights is to be turned ON or OFF. Flashing is accomplished by sending the
+lighting message with the state alternately ON or OFF. A lighting command message must be sent at least once per second. It is the
+responsibility of the tractor designer to provide the correct combination of lamp commands to meet local legislative directives. See
+PGN 65088 for the message to provide feedback for this command message.
+
+
+pgn65099 - Transmission Configuration 2 - TCFG2 -
+Transmission Repetition Rate: On request or sender may transmit every 5 seconds until acknowlegded by reception of the engine configuration message
+65251 SPN 1846.
+Data Length: Variable bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 75
+Default Priority: 6
+Parameter Group Number: 65099 ( 00FE4B 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Transmission Torque Limit 1845
+Contains transmission configuration information.
+
+
+pgn65100 - Military Lighting Command - ML -
+Transmission Repetition Rate: 500ms or upon state change, but not faster than 100 ms.
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 76
+Default Priority: 6
+Parameter Group Number: 65100 ( 00FE4C 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1.1 2 bits Rear Black Out Marker Select 1840
+1.3 2 bits Front Black Out Marker Lamp Select 1839
+1.5 2 bits Convoy Lamp Select 1838
+1.7 2 bits Convoy Driving Lamp Select 1837
+3.7 2 bits Black Out Brake/Stop Lamp Select 1841
+4.1 2 bits Night Vision Illuminator Select 1843
+4.7 2 bits Black Out Work Lamp Select 1842
+8 1 byte Operators Black Out Intensity Selection 1844
+The message contains parameters that control military specific lights.
+
+
+pgn65101 - Total Averaged Information - TAVG -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 77
+Default Priority: 7
+Parameter Group Number: 65101 ( 00FE4D 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Total Average Fuel Rate 1834
+3-4 2 bytes Total Average Fuel Economy 1835
+Averages of information accumulated over the life of the engine
+
+
+pgn65102 - Door Control - DC -
+Transmission Repetition Rate: 100 ms
+Data Length: 8 bytes
+Data Page: 0
+
+
+pgn65103 - Vehicle Dynamic Stability Control 1 - VDC1 -
+Transmission Repetition Rate: 100ms
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 79
+Default Priority: 6
+Parameter Group Number: 65103 ( 00FE4F 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1.1 2 bits VDC Information Signal 1813
+1.3 2 bits VDC Fully Operational 1814
+1.5 2 bits VDC brake light request 1815
+2.1 2 bits ROP Engine Control active 1816
+2.3 2 bits ROP Brake Control active 1818
+2.5 2 bits YC Engine Control active 1817
+2.7 2 bits YC Brake Control active 1819
+Contains information which relates to the VDC system status.
+
+
+pgn65104 - Battery Temperature - BT1 -
+Transmission Repetition Rate: 1 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 80
+Default Priority: 6
+Parameter Group Number: 65104 ( 00FE50 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Battery 1 Temperature 1800
+2 1 byte Battery 2 Temperature 1801
+Contains battery temperature information.
+
+
+pgn65105 - Adaptive Cruise Control, Operator Input - ACC2 -
+Transmission Repetition Rate: 250 ms
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 81
+Default Priority: 6
+Parameter Group Number: 65105 ( 00FE51 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1.6 3 bits Requested ACC Distance Mode 1799
+The operator requested characteristics for the ACC systems operation.
+
+
+pgn65106 - Vehicle Electrical Power 3 - VP3 -
+Transmission Repetition Rate: 1 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 82
+Default Priority: 6
+Parameter Group Number: 65106 ( 00FE52 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Alternator Current (High Range/Resolution) 1795
+3-4 2 bytes Net Battery Current (High Range/Resolution) 2579
+This contains high resolution/range parameters reported from the allternator or power generation components.
+
+
+pgn65107 - Retarder Continuous Torque & Speed Limit - RTC1 -
+Transmission Repetition Rate: 5 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 83
+Default Priority: 6
+Parameter Group Number: 65107 ( 00FE53 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Low Limit Threshhold for Maximum RPM from Retarder 1776
+2 1 byte High Limit Threshhold for Minimum Continuous RPM from Retarder 1777
+3 1 byte Low Limit Threshhold for Maximum Torque from Retarder 1778
+4 1 byte High Limit Threshhold for Minimum Continuous Torque from Retarder 1779
+5 1 byte Maximum Continuous Retarder Speed 1780
+6 1 byte Minimum Continuous Retarder Speed 1781
+7 1 byte Maximum Continuous Retarder Torque 1782
+8 1 byte Minimum Continuous Retarder Torque 1783
+
+
+pgn65108 - Engine Continuous Torque & Speed Limit - ECT1 -
+Transmission Repetition Rate: 5 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 84
+Default Priority: 6
+Parameter Group Number: 65108 ( 00FE54 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Low Limit Threshhold for Maximum RPM from Engine 1768
+2 1 byte High Limit Threshhold for Minimum Continuous Engine RPM 1769
+3 1 byte Low Limit Threshold for Maximum Torque from Engine 1770
+4 1 byte High Limit Threshhold for Minimum Continuous Torque from Engine 1771
+5 1 byte Maximum Continuous Engine RPM 1772
+6 1 byte Minimum Continuous Engine RPM 1773
+7 1 byte Maximum Continuous Engine Torque 1774
+8 1 byte Minimum Continuous Engine Torque 1775
+
+
+pgn65109 - Gaseous Fuel Properties - GFD -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 85
+Default Priority: 6
+Parameter Group Number: 65109 ( 00FE55 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Specific Heat Ratio 1767
+
+
+pgn65110 - TANK Information 1 - TI1 -
+Transmission Repetition Rate: 1 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 86
+Default Priority: 6
+Parameter Group Number: 65110 ( 00FE56 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Catalyst Tank Level 1761
+Contains information on various tank levels
+
+
+pgn65111 - Air Suspension Control 5 - ASC5 -
+Transmission Repetition Rate: 100 ms
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 87
+Default Priority: 3
+Parameter Group Number: 65111 ( 00FE57 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Damper Stiffness Front Axle 1729
+2 1 byte Damper Stiffness Rear Axle 1730
+
+
+pgn65112 - Air Suspension Control 4 - ASC4 -
+Transmission Repetition Rate: 100 ms
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 88
+Default Priority: 6
+Parameter Group Number: 65112 ( 00FE58 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Bellow Pressure Front Axle Left 1725
+3-4 2 bytes Bellow Pressure Front Axle Right 1726
+5-6 2 bytes Bellow Pressure Rear Axle Left 1727
+7-8 2 bytes Bellow Pressure Rear Axle Right 1728
+Used for bellow pressure information
+
+
+pgn65113 - Air Suspension Control 3 - ASC3 -
+Transmission Repetition Rate: 100 ms
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 89
+Default Priority: 6
+Parameter Group Number: 65113 ( 00FE59 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Relative Level Front Axle Left 1721
+3-4 2 bytes Relative Level Front Axle Right 1722
+5-6 2 bytes Relative Level Rear Axle Left 1724
+7-8 2 bytes Relative Level Rear Axle Right 1723
+Used for height information
+
+
+pgn65114 - Air Suspension Control 1 - ASC1 -
+Transmission Repetition Rate: 100 ms
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 90
+Default Priority: 3
+Parameter Group Number: 65114 ( 00FE5A 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1.1 4 bits Nominal Level Front Axle 1734
+1.5 4 bits Nominal Level Rear Axle 1733
+2.1 2 bits Below Nominal Level Front Axle 1738
+2.3 2 bits Below Nominal Level Rear Axle 1754
+2.5 2 bits Above Nominal Level Front Axle 1737
+2.7 2 bits Above Nominal Level Rear Axle 1736
+3.1 2 bits Lowering Control Mode Front Axle 1740
+3.3 2 bits Lowering Control Mode Rear Axle 1755
+3.5 2 bits Lifting Control Mode Front Axle 1739
+3.7 2 bits Lifting Control Mode Rear Axle 1756
+4.1 4 bits Kneeling Information 1742
+4.5 4 bits Level Control Mode 1741
+5.1 2 bits Security Device 1746
+5.3 2 bits Vehicle Motion Inhibit 1745
+5.5 2 bits Door Release 1744
+5.7 2 bits Lift Axle 1 Position 1743
+6.1 2 bits Front Axle in Bumper Range 1824
+6.3 2 bits Rear Axle in Bumper Range 1823
+6.7 2 bits Lift Axle 2 Position 1822
+7.1 2 bits Suspension Remote Control 1 1826
+7.3 2 bits Suspension Remote control 2 1825
+8.1 4 bits Suspension Control Refusal Information 1827
+Used for suspension control control information
+
+
+pgn65115 - Forward Lane Image - FLI2 -
+Transmission Repetition Rate: 100 ms
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 91
+Default Priority: 6
+Parameter Group Number: 65115 ( 00FE5B 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1.3 2 bits Lane Tracking Status Right Side 1711
+1.5 2 bits Lane Tracking Status Left Side 1710
+1.7 2 bits Lane Departure Indication Enable Status 1702
+
+
+pgn65126 - Battery Main Switch Information - BM -
+Transmission Repetition Rate: 1 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 102
+Default Priority: 6
+Parameter Group Number: 65126 ( 00FE66 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1.1 2 bits Battery Main Switch Hold State 1681
+
+
+pgn65127 - Climate Control Configuration - CCC -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 103
+Default Priority: 6
+Parameter Group Number: 65127 ( 00FE67 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Auxiliary Heater Maximum Output Power 1690
+
+
+pgn65128 - Vehicle Fluids - VF -
+Transmission Repetition Rate: 1 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 104
+Default Priority: 6
+Parameter Group Number: 65128 ( 00FE68 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Hydraulic Temperature 1638
+2.1 2 bits Hydraulic Oil Filter Restriction Switch 1713
+2.3 2 bits Winch Oil Pressure Switch 1857
+3 1 byte Hydraulic Oil Level 2602
+This parameter group transfers vehicle fluid information.
+
+
+pgn65129 - Engine Temperature 3 - ET3 -
+Transmission Repetition Rate: 1 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 105
+Default Priority: 6
+Parameter Group Number: 65129 ( 00FE69 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Intake Manifold 1 Air Temperature (High Resolution) 1636
+3-4 2 bytes Engine Coolant Temperature (High Resolution) 1637
+This parameter group is used to transit high resolution engine temperatures for control purposes.
+
+
+pgn65130 - Engine Fuel/lube systems - EFS -
+Transmission Repetition Rate: 0.5 s
+
+
+pgn65131 - Driver's Identification - DI -
+Transmission Repetition Rate: On request
+Data Length: Variable bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 107
+Default Priority: 6
+Parameter Group Number: 65131 ( 00FE6B 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 Variable ("*" Driver 1 identification 1625
+delimited)
+3-4 Variable ("*" Driver 2 identification 1626
+delimited)
+Field: a Driver 1 Identification Delimiter (ASCII '*') b Driver 2 Identification Delimiter (ASCII '*') NOTE - If only driver card 1 is
+present, only the parameter driver 1 identification and two delimiters shall be transmitted. If only driver card 2 is present, a delimiter
+followed by parameter driver 2 identification and the second delimiter shall be transmitted. If no driver cards are present, only the two
+delimiters shall be sent."
+
+
+pgn65132 - Tachograph - TCO1 -
+Transmission Repetition Rate: 50 ms
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 108
+Default Priority: 3
+Parameter Group Number: 65132 ( 00FE6C 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1.1 3 bits Driver 1 working state 1612
+1.4 3 bits Driver 2 working state 1613
+1.7 2 bits Drive recognize 1611
+2.1 4 bits Driver 1 Time Related States 1617
+2.5 2 bits Driver card, driver 1 1615
+2.7 2 bits Overspeed 1614
+3.1 4 bits Driver 2 Time Related States 1618
+3.5 2 bits Driver card, driver 2 1616
+4.1 2 bits System event 1622
+4.3 2 bits Handling information 1621
+4.5 2 bits Tachograph performance 1620
+4.7 2 bits Direction indicator 1619
+5-6 2 bytes Tachograph output shaft speed 1623
+7-8 2 bytes Tachograph vehicle speed 1624
+
+
+pgn65133 - Heater Information - HTR -
+Transmission Repetition Rate: 1 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 109
+Default Priority: 6
+Parameter Group Number: 65133 ( 00FE6D 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Auxiliary Heater Output Coolant Temperature 1687
+2 1 byte Auxiliary Heater Input Air Temperature 1688
+3 1 byte Auxiliary Heater Output Power Percent 1689
+4.1 4 bits Auxiliary Heater Mode 1677
+5.1 2 bits Auxilary Heater Water Pump Status 1676
+5.3 2 bits Cab Ventilation 1678
+5.5 2 bits Engine Heating Zone 1679
+5.7 2 bits Cab Heating Zone 1680
+
+
+pgn65134 - High Resolution Wheel Speed - HRW -
+Transmission Repetition Rate: 20 ms
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 110
+Default Priority: 2
+Parameter Group Number: 65134 ( 00FE6E 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Front Axle, Left Wheel Speed 1592
+3-4 2 bytes Front axle, right wheel speed 1593
+5-6 2 bytes Rear axle, left wheel speed 1594
+7-8 2 bytes Rear axle, right wheel speed 1595
+
+
+pgn65135 - Adaptive Cruise Control - ACC1 -
+Transmission Repetition Rate: 100 ms
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 111
+Default Priority: 4
+Parameter Group Number: 65135 ( 00FE6F 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Speed of forward vehicle 1586
+2 1 byte Distance to forward vehicle 1587
+3 1 byte Adaptive Cruise Control Set Speed 1588
+4.1 3 bits Adaptive Cruise Control Mode 1590
+4.4 3 bits Adaptive cruise control set distance mode 1589
+5-6 2 bytes Road curvature 1591
+7.1 2 bits ACC Target Detected 1798
+7.3 2 bits ACC System Shutoff Warning 1797
+7.5 2 bits ACC Distance Alert Signal 1796
+NOTE- The ACC1 message is required whenever the engine is running and ACC is powered on and not faulted. The timeout for ACC1
+message will be between 2.5 times to 5 times the update rate. The ACC1 message is intended primarily for engines and driver display
+units. The receiving device should identify the ACC device based on ACC function value of 32 (headway controller) or source address
+of 42 (headway controller). In the event that the engine is running, the ACC is installed and the ACC1 message is not present, the
+engine will disable cruise control and return to non-cruise mode; also, the driver display unit will notify the driver that ACC operation
+is no longer available. In addition to the ACC1 timeout, engine cruise control will also be disabled if parameter ""Adaptive Cruise
+Control State"" in ACC1 is 110b (ACC disabled or in error). In some cases, it may be possible for the driver to restart cruise control
+(without ACC capability) during ACC/J1939 fault by performing a reset function. See Figure PGN65135_A. It is possible that engines
+and driver display units may require calibration settings in order to know if the present vehicle configuration includes an ACC system
+or not. A calibration setting may also be needed for defining the driver reset function.
+
+
+pgn65136 - Combination Vehicle Weight - CVW -
+Transmission Repetition Rate: On request
+Data Length: Variable bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 112
+Default Priority: 6
+Parameter Group Number: 65136 ( 00FE70 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Powered Vehicle Weight 1585
+3-4 2 bytes Gross Combination Vehicle Weight 1760
+
+
+pgn65137 - Laser Tracer Position - LTP -
+Transmission Repetition Rate: 50 ms
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 113
+Default Priority: 3
+Parameter Group Number: 65137 ( 00FE71 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Laser Tracer Target Deviation 1579
+3-4 2 bytes Laser Tracer Vertical Distance 1580
+5 1 byte Laser Tracer Horizontal Deviation 1581
+6 8 bits LED Display Data #2 1582
+7 8 bits Laser Tracer Information 1583
+
+
+pgn65138 - Laser Leveling System Blade Control - LBC -
+Transmission Repetition Rate: 50 ms
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 114
+Default Priority: 3
+Parameter Group Number: 65138 ( 00FE72 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Blade Duration and Direction 1577
+3 8 bits Blade Control Mode 1578
+
+
+pgn65139 - Laser Receiver Mast Position - LMP -
+Transmission Repetition Rate: 50 ms
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 115
+Default Priority: 3
+Parameter Group Number: 65139 ( 00FE73 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Mast Position 1576
+
+
+pgn65140 - Modify Leveling System Control Set Point - LSP -
+Transmission Repetition Rate: 50 ms
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 116
+Default Priority: 3
+Parameter Group Number: 65140 ( 00FE74 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Modify Set Point 1575
+3-6 4 bytes Blade Height Set Point - High Resolution 1759
+
+
+pgn65141 - Laser Leveling System Vertical Deviation - LVD -
+Transmission Repetition Rate: 50 ms
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 117
+Default Priority: 3
+Parameter Group Number: 65141 ( 00FE75 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Laser Strike Vertical Deviation 1574
+3 1 byte Laser Receiver Type 2576
+4-5 2 bytes Laser Strike Data Latency 2793
+6-7 2 bytes Absolute Laser Strike Position 2794
+
+
+pgn65142 - Laser Leveling System Vertical Position Display Data - LVDD -
+Transmission Repetition Rate: 100 ms
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 118
+Default Priority: 4
+Parameter Group Number: 65142 ( 00FE76 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 8 bits LED Display Data #1 1573
+2.1 4 bits LED Display Mode Control 1805
+2.5 4 bits LED Display Deadband Control 1806
+3.1 4 bits LED Pattern Control 2578
+3.5 4 bits Display Deadbands 2577
+
+
+pgn65143 - Auxiliary Pressures - AP -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 119
+Default Priority: 7
+Parameter Group Number: 65143 ( 00FE77 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Auxiliary Vacuum Pressure Reading 136
+3-4 2 bytes Auxiliary Gage Pressure Reading 1 137
+5-6 2 bytes Auxiliary Absolute Pressure Reading 138
+
+
+pgn65144 - Tire Pressure Control Unit Mode and Status - TP1 -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 120
+Default Priority: 7
+Parameter Group Number: 65144 ( 00FE78 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Tire Pressure Check Interval 39
+2.1 4 bits Steer Channel Mode 1466
+3.1 4 bits Trailer/tag Channel Mode 1467
+3.5 4 bits Drive Channel Mode 1468
+4.1 2 bits PCU Drive Solenoid Status 1469
+4.3 2 bits PCU Steer Solenoid Status 1470
+4.5 2 bits Tire Pressure Supply Switch Status 1471
+5.1 2 bits PCU Deflate Solenoid Status 1472
+5.3 2 bits PCU Control Solenoid Status 1473
+5.5 2 bits PCU Supply Solenoid Status 1474
+5.7 2 bits PCU Trailer, Tag or Push Solenoid Status 1475
+
+
+pgn65145 - Tire Pressure Control Unit Target Pressures - TP2 -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 121
+Default Priority: 7
+Parameter Group Number: 65145 ( 00FE79 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Trailer, Tag Or Push Channel Tire Pressure Target 141
+3-4 2 bytes Drive Channel Tire Pressure Target 142
+5-6 2 bytes Steer Channel Tire Pressure Target 143
+
+
+pgn65146 - Tire Pressure Control Unit Current Pressures - TP3 -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 122
+Default Priority: 7
+Parameter Group Number: 65146 ( 00FE7A 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Trailer, Tag Or Push Channel Tire Pressure 144
+3-4 2 bytes Drive Channel Tire Pressure 145
+5-6 2 bytes Steel Channel Tire Pressure 146
+
+
+pgn65147 - Combustion Time 1 - CT1 -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 123
+Default Priority: 7
+Parameter Group Number: 65147 ( 00FE7B 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Cylinder 1 Combustion Time 1444
+3-4 2 bytes Cylinder 2 Combustion Time 1445
+5-6 2 bytes Cylinder 3 Combustion Time 1446
+7-8 2 bytes Cylinder 4 Combustion Time 1447
+
+
+pgn65148 - Combustion Time 2 - CT2 -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 124
+Default Priority: 7
+Parameter Group Number: 65148 ( 00FE7C 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Cylinder 5 Combustion Time 1448
+3-4 2 bytes Cylinder 6 Combustion Time 1449
+5-6 2 bytes Cylinder 7 Combustion Time 1450
+7-8 2 bytes Cylinder 8 Combustion Time 1451
+
+
+pgn65149 - Combustion Time 3 - CT3 -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 125
+Default Priority: 7
+Parameter Group Number: 65149 ( 00FE7D 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Cylinder 9 Combustion Time 1452
+3-4 2 bytes Cylinder 10 Combustion Time 1453
+5-6 2 bytes Cylinder 11 Combustion Time 1454
+7-8 2 bytes Cylinder 12 Combustion Time 1455
+
+
+pgn65150 - Combustion Time 4 - CT4 -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 126
+Default Priority: 7
+Parameter Group Number: 65150 ( 00FE7E 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Cylinder 13 Combustion Time 1456
+3-4 2 bytes Cylinder 14 Combustion Time 1457
+5-6 2 bytes Cylinder 15 Combustion Time 1458
+7-8 2 bytes Cylinder 16 Combustion Time 1459
+
+
+pgn65151 - Combustion Time 5 - CT5 -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 127
+Default Priority: 7
+Parameter Group Number: 65151 ( 00FE7F 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Cylinder 17 Combustion Time 1460
+3-4 2 bytes Cylinder 18 Combustion Time 1461
+5-6 2 bytes Cylinder 19 Combustion Time 1462
+7-8 2 bytes Cylinder 20 Combustion Time 1463
+
+
+pgn65152 - Combustion Time 6 - CT6 -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 128
+Default Priority: 7
+Parameter Group Number: 65152 ( 00FE80 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Desired Combustion Time 1464
+3-4 2 bytes Average Engine Combustion Time 1465
+
+
+pgn65153 - Fuel Information 2 (Gaseous) - GFI2 -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+
+
+pgn65154 - Ignition Timing 1 - IT1 -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 130
+Default Priority: 7
+Parameter Group Number: 65154 ( 00FE82 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Cylinder 1 Ignition Timing 1413
+3-4 2 bytes Cylinder 2 Ignition Timing 1414
+5-6 2 bytes Cylinder 3 Ignition Timing 1415
+7-8 2 bytes Cylinder 4 Ignition Timing 1416
+
+
+pgn65155 - Ignition Timing 2 - IT2 -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 131
+Default Priority: 7
+Parameter Group Number: 65155 ( 00FE83 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Cylinder 5 Ignition Timing 1417
+3-4 2 bytes Cylinder 6 Ignition Timing 1418
+5-6 2 bytes Cylinder 7 Ignition Timing 1419
+7-8 2 bytes Cylinder 8 Ignition Timing 1420
+
+
+pgn65156 - Ignition Timing 3 - IT3 -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 132
+Default Priority: 7
+Parameter Group Number: 65156 ( 00FE84 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Cylinder 9 Ignition Timing 1421
+3-4 2 bytes Cylinder 10 Ignition Timing 1422
+5-6 2 bytes Cylinder 11 Ignition Timing 1423
+7-8 2 bytes Cylinder 12 Ignition Timing 1424
+
+
+pgn65157 - Ignition Timing 4 - IT4 -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 133
+Default Priority: 7
+Parameter Group Number: 65157 ( 00FE85 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Cylinder 13 Ignition Timing 1425
+3-4 2 bytes Cylinder 14 Ignition Timing 1426
+5-6 2 bytes Cylinder 15 Ignition Timing 1427
+7-8 2 bytes Cylinder 16 Ignition Timing 1428
+
+
+pgn65158 - Ignition Timing 5 - IT5 -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 134
+Default Priority: 7
+Parameter Group Number: 65158 ( 00FE86 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Cylinder 17 Ignition Timing 1429
+3-4 2 bytes Cylinder 18 Ignition Timing 1430
+5-6 2 bytes Cylinder 19 Ignition Timing 1431
+7-8 2 bytes Cylinder 20 Ignition Timing 1432
+
+
+pgn65159 - Ignition Timing 6 - IT6 -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 135
+Default Priority: 7
+Parameter Group Number: 65159 ( 00FE87 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Desired Ignition Timing #1 1433
+3-4 2 bytes Desired Ignition Timing #2 1434
+5-6 2 bytes Desired Ignition Timing #3 1435
+7-8 2 bytes Actual Ignition Timing 1436
+
+
+pgn65160 - Ignition Transformer Secondary Output 1 - ISO1 -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 136
+Default Priority: 7
+Parameter Group Number: 65160 ( 00FE88 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Cylinder 1 Ignition Transformer Secondary Output 1393
+2 1 byte Cylinder 2 Ignition Transformer Secondary Output 1394
+3 1 byte Cylinder 3 Ignition Transformer Secondary Output 1395
+4 1 byte Cylinder 4 Ignition Transformer Secondary Output 1396
+5 1 byte Cylinder 5 Ignition Transformer Secondary Output 1397
+6 1 byte Cylinder 6 Ignition Transformer Secondary Output 1398
+7 1 byte Cylinder 7 Ignition Transformer Secondary Output 1399
+8 1 byte Cylinder 8 Ignition Transformer Secondary Output 1400
+
+
+pgn65161 - Ignition Transformer Secondary Output 2 - ISO2 -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 137
+Default Priority: 7
+Parameter Group Number: 65161 ( 00FE89 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Cylinder 9 Ignition Transformer Secondary Output 1401
+2 1 byte Cylinder 10 Ignition Transformer Secondary Output 1402
+3 1 byte Cylinder 11 Ignition Transformer Secondary Output 1403
+4 1 byte Cylinder 12 Ignition Transformer Secondary Output 1404
+5 1 byte Cylinder 13 Ignition Transformer Secondary Output 1405
+6 1 byte Cylinder 14 Ignition Transformer Secondary Output 1406
+7 1 byte Cylinder 15 Ignition Transformer Secondary Output 1407
+8 1 byte Cylinder 16 Ignition Transformer Secondary Output 1408
+
+
+pgn65162 - Ignition Transformer Secondary Output 3 - ISO3 -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+
+
+pgn65163 - Gaseous Fuel Pressure - GFP -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 139
+Default Priority: 7
+Parameter Group Number: 65163 ( 00FE8B 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Absolute Fuel Valve Inlet Pressure 1390
+3-4 2 bytes Outlet to Inlet Fuel Valve Differential Pressure 1391
+5-6 2 bytes Air to Fuel Differential Pressure 1392
+
+
+pgn65164 - Auxiliary Analog Information - AAI -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 140
+Default Priority: 7
+Parameter Group Number: 65164 ( 00FE8C 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Auxiliary Temperature 1 441
+2 1 byte Auxiliary Temperature 2 442
+3 1 byte Auxiliary Pressure #1 1387
+4 1 byte Auxiliary Pressure #2 1388
+
+
+pgn65165 - Vehicle Electrical Power 2 - VP2 -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 141
+Default Priority: 7
+Parameter Group Number: 65165 ( 00FE8D 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Battery 2 Potential (Voltage) 444
+
+
+pgn65166 - Service 2 - S2 -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 142
+Default Priority: 7
+Parameter Group Number: 65166 ( 00FE8E 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Service Component Identification 1379
+2-3 2 bytes Time Since Last Service 1350
+NOTE - There are two acceptable formats for the Service PGN. Format 1 has only 8 bytes of data and reports the component most in
+need of service for each of the three categories. Format 2, however, uses the transport layer as necessary in order to repeat these 8 bytes
+of service component information until all supported service components in each category have been transmitted.
+
+
+pgn65167 - Supply Pressure 2 - SP2 -
+Transmission Repetition Rate: 1 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 143
+Default Priority: 6
+Parameter Group Number: 65167 ( 00FE8F 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Externally Supplied Air Pressure 1320
+
+
+pgn65168 - Engine Torque History - ETH -
+Transmission Repetition Rate: On request
+Data Length: Variable bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 144
+Default Priority: 6
+Parameter Group Number: 65168 ( 00FE90 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+01 1 byte Number of Torque History Records 1246
+02-03 2 bytes Engine Power 1247
+04-05 2 bytes Peak Engine Torque 1 1248
+06-07 2 bytes Peak Engine Torque 2 1249
+08 1 byte Calibration Record Start Month 1250
+09 1 byte Calibration Record Start Day 1251
+10 1 byte Calibration Record Start Year 1252
+11-14 4 bytes Calibration Record Duration Time 1253
+15.1 2 bits Torque Limiting Feature Status 1254
+15.3 3 bits Torque Limit Feature 1632
+16-17 2 bytes Transmission Gear Ratio 1 1255
+18-19 2 bytes Engine Torque Limit 1, Transmission 1256
+20-21 2 bytes Transmission Gear Ratio 2 1257
+22-23 2 bytes Engine Torque Limit 2, Transmission 1258
+24-25 2 bytes Transmission Gear Ratio 3 1259
+26-27 2 bytes Engine Torque Limit 3, Transmission 1260
+28-29 2 bytes Engine Torque Limit 4, Transmission 1261
+30-31 2 bytes Engine Torque Limit 5, Switch 1262
+32-33 2 bytes Engine Torque Limit 6, Axle Input 1263
+NOTE - The torque history PGN is variable in length and may contain up to 125 torque history records. Each torque history record
+MUST BE 38 bytes in length. Any unused bytes must be 0xFF.
+
+
+pgn65169 - Fuel Leakage - FL -
+Transmission Repetition Rate: 1 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 145
+Default Priority: 7
+Parameter Group Number: 65169 ( 00FE91 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1.1 2 bits Fuel Leakage 1 1239
+1.3 2 bits Fuel Leakage 2 1240
+
+
+pgn65170 - Engine Information - EI -
+Transmission Repetition Rate: 100 ms
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 146
+Default Priority: 7
+Parameter Group Number: 65170 ( 00FE92 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Pre-filter Oil Pressure 1208
+
+
+pgn65171 - Engine Electrical System/Module Information - EES -
+Transmission Repetition Rate: 100 ms
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 147
+Default Priority: 7
+Parameter Group Number: 65171 ( 00FE93 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Electrical Load 1204
+3.1 2 bits Safety Wire Status 1205
+3.3 2 bits Turning Gear Engaged 1206
+
+
+pgn65172 - Engine Auxiliary Coolant - EAC -
+Transmission Repetition Rate: 0.5 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 148
+Default Priority: 6
+Parameter Group Number: 65172 ( 00FE94 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Engine Auxiliary Coolant Pressure 1203
+2 1 byte Engine Auxiliary Coolant Temperature 1212
+3 1 byte Sea Water Pump Outlet Pressure 2435
+
+
+pgn65173 - Rebuild Information - RBI -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 149
+Default Priority: 7
+Parameter Group Number: 65173 ( 00FE95 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-4 4 bytes Engine Operation Time Since Rebuild 1193
+
+
+pgn65174 - Turbocharger Wastegate - TCW -
+Transmission Repetition Rate: 100 ms
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 150
+Default Priority: 6
+Parameter Group Number: 65174 ( 00FE96 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Turbocharger 1 Wastegate Drive 1188
+2 1 byte Turbocharger 2 Wastegate Drive 1189
+3 1 byte Turbocharger 3 Wastegate Drive 1190
+4 1 byte Turbocharger 4 Wastegate Drive 1191
+5 1 byte Turbocharger Wastegate Actuator Control Air Pressure 1192
+
+
+pgn65175 - Turbocharger Information 5 - TCI5 -
+Transmission Repetition Rate: 1 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 151
+Default Priority: 6
+Parameter Group Number: 65175 ( 00FE97 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Turbocharger 1 Turbine Outlet Temperature 1184
+3-4 2 bytes Turbocharger 2 Turbine Outlet Temperature 1185
+5-6 2 bytes Turbocharger 3 Turbine Outlet Temperature 1186
+7-8 2 bytes Turbocharger 4 Turbine Outlet Temperature 1187
+
+
+pgn65176 - Turbocharger Information 4 - TCI4 -
+Transmission Repetition Rate: 1 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 152
+Default Priority: 6
+Parameter Group Number: 65176 ( 00FE98 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Turbocharger 1 Turbine Inlet Temperature 1180
+3-4 2 bytes Turbocharger 2 Turbine Inlet Temperature 1181
+5-6 2 bytes Turbocharger 3 Turbine Inlet Temperature 1182
+7-8 2 bytes Turbocharger 4 Turbine Inlet Temperature 1183
+
+
+pgn65177 - Turbocharger Information 3 - TCI3 -
+Transmission Repetition Rate: 1 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 153
+Default Priority: 6
+Parameter Group Number: 65177 ( 00FE99 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Turbocharger 1 Compressor Inlet Pressure 1176
+3-4 2 bytes Turbocharger 2 Compressor Inlet Pressure 1177
+5-6 2 bytes Turbocharger 3 Compressor Inlet Pressure 1178
+7-8 2 bytes Turbocharger 4 Compressor Inlet Pressure 1179
+
+
+pgn65178 - Turbocharger Information 2 - TCI2 -
+Transmission Repetition Rate: 1 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 154
+Default Priority: 6
+Parameter Group Number: 65178 ( 00FE9A 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 2 bytes Turbocharger 1 Compressor Inlet Temperature 1172
+2 2 bytes Turbocharger 2 Compressor Inlet Temperature 1173
+3 2 bytes Turbocharger 3 Compressor Inlet Temperature 1174
+4 2 bytes Turbocharger 4 Compressor Inlet Temperature 1175
+
+
+pgn65179 - Turbocharger Information 1 - TCI1 -
+Transmission Repetition Rate: 1 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 155
+Default Priority: 7
+Parameter Group Number: 65179 ( 00FE9B 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Turbocharger Lube Oil Pressure 2 1168
+2-3 2 bytes Turbocharger 2 Speed 1169
+4-5 2 bytes Turbocharger 3 Speed 1170
+6-7 2 bytes Turbocharger 4 Speed 1171
+
+
+pgn65180 - Main Bearing Temperature 3 - MBT3 -
+Transmission Repetition Rate: 1 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 156
+Default Priority: 6
+
+
+pgn65181 - Main Bearing Temperature 2 - MBT2 -
+Transmission Repetition Rate: 1 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 157
+Default Priority: 6
+Parameter Group Number: 65181 ( 00FE9D 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Main Bearing 5 Temperature 1161
+3-4 2 bytes Main Bearing 6 Temperature 1162
+5-6 2 bytes Main Bearing 7 Temperature 1163
+7-8 2 bytes Main Bearing 8 Temperature 1164
+
+
+pgn65182 - Main Bearing Temperature 1 - MBT1 -
+Transmission Repetition Rate: 1 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 158
+Default Priority: 6
+Parameter Group Number: 65182 ( 00FE9E 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Main Bearing 1 Temperature 1157
+3-4 2 bytes Main Bearing 2 Temperature 1158
+5-6 2 bytes Main Bearing 3 Temperature 1159
+7-8 2 bytes Main Bearing 4 Temperature 1160
+
+
+pgn65183 - Exhaust Port Temperature 5 - EPT5 -
+Transmission Repetition Rate: 1 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 159
+Default Priority: 7
+Parameter Group Number: 65183 ( 00FE9F 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Exhaust Gas Port 17 Temperature 1153
+3-4 2 bytes Exhaust Gas Port 18 Temperature 1154
+5-6 2 bytes Exhaust Gas Port 19 Temperature 1155
+7-8 2 bytes Exhaust Gas Port 20 Temperature 1156
+
+
+pgn65184 - Exhaust Port Temperature 4 - EPT4 -
+Transmission Repetition Rate: 1 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 160
+Default Priority: 6
+Parameter Group Number: 65184 ( 00FEA0 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Exhaust Gas Port 13 Temperature 1149
+3-4 2 bytes Exhaust Gas Port 14 Temperature 1150
+5-6 2 bytes Exhaust Gas Port 15 Temperature 1151
+7-8 2 bytes Exhaust Gas Port 16 Temperature 1152
+
+
+pgn65185 - Exhaust Port Temperature 3 - EPT3 -
+Transmission Repetition Rate: 1 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 161
+Default Priority: 7
+Parameter Group Number: 65185 ( 00FEA1 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Exhaust Gas Port 9 Temperature 1145
+3-4 2 bytes Exhaust Gas Port 10 Temperature 1146
+5-6 2 bytes Exhaust Gas Port 11 Temperature 1147
+7-8 2 bytes Exhaust Gas Port 12 Temperature 1148
+
+
+pgn65186 - Exhaust Port Temperature 2 - EPT2 -
+Transmission Repetition Rate: 1 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 162
+Default Priority: 7
+Parameter Group Number: 65186 ( 00FEA2 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Exhaust Gas Port 5 Temperature 1141
+3-4 2 bytes Exhaust Gas Port 6 Temperature 1142
+5-6 2 bytes Exhaust Gas Port 7 Temperature 1143
+7-8 2 bytes Exhaust Gas Port 8 Temperature 1144
+
+
+pgn65187 - Exhaust Port Temperature 1 - EPT1 -
+Transmission Repetition Rate: 1 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 163
+Default Priority: 7
+Parameter Group Number: 65187 ( 00FEA3 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Exhaust Gas Port 1 Temperature 1137
+3-4 2 bytes Exhaust Gas Port 2 Temperature 1138
+5-6 2 bytes Exhaust Gas Port 3 Temperature 1139
+7-8 2 bytes Exhaust Gas Port 4 Temperature 1140
+
+
+pgn65188 - Engine Temperature 2 - ET2 -
+Transmission Repetition Rate: 1s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 164
+Default Priority: 6
+Parameter Group Number: 65188 ( 00FEA4 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Engine Oil Temperature 2 1135
+3-4 2 bytes Engine ECU Temperature 1136
+5-6 2 bytes Exhaust Gas Recirculation Differential Pressure 411
+7-8 2 bytes Exhaust Gas Recirculation Temperature 412
+
+
+pgn65189 - Intake Manifold Information 2 - IMT2 -
+Transmission Repetition Rate: 1 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 165
+Default Priority: 7
+Parameter Group Number: 65189 ( 00FEA5 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Intake Manifold 2 Temperature 1131
+2 1 byte Intake Manifold 3 Temperature 1132
+3 1 byte Intake Manifold 4 Temperature 1133
+4 1 byte Intake Manifold 5 Temperature 1802
+5 1 byte Intake Manifold 6 Temperature 1803
+
+
+pgn65190 - Intake Manifold Information 1 - IMT1 -
+
+
+pgn65191 - Alternator Temperature - AT -
+Transmission Repetition Rate: 1 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 167
+Default Priority: 7
+Parameter Group Number: 65191 ( 00FEA7 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Alternator Bearing 1 Temperature 1122
+2 1 byte Alternator Bearing 2 Temperature 1123
+3 1 byte Alternator Winding 1 Temperature 1124
+4 1 byte Alternator Winding 2 Temperature 1125
+5 1 byte Alternator Winding 3 Temperature 1126
+
+
+pgn65192 - Articulation Control - AC -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 168
+Default Priority: 7
+Parameter Group Number: 65192 ( 00FEA8 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Articulation Angle 1120
+
+
+pgn65193 - Exhaust Oxygen 1 - EO1 -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 169
+Default Priority: 7
+Parameter Group Number: 65193 ( 00FEA9 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Desired Rated Exhaust Oxygen 1117
+3-4 2 bytes Desired Exhaust Oxygen 1118
+5-6 2 bytes Actual Exhaust Oxygen 1119
+7 1 byte Exhaust Gas Oxygen Sensor Fueling Correction 1695
+8.7 2 bits Exhaust Gas Oxygen Sensor Closed Loop Operation 1696
+
+
+pgn65194 - Alternate Fuel 2 - AF2 -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 170
+Default Priority: 7
+Parameter Group Number: 65194 ( 00FEAA 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Gaseous Fuel Correction Factor 1116
+2-3 2 bytes Desired Absolute Intake Manifold Pressure (Turbo Boost Limit) 1692
+4 1 byte Wastegate Valve Position 1693
+5 1 byte Gas Mass Flow Sensor Fueling Correction 1694
+
+
+pgn65195 - Electronic Transmission Controller 6 - ETC6 -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 171
+Default Priority: 7
+Parameter Group Number: 65195 ( 00FEAB 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Recommended Gear 1113
+2 1 byte Highest Possible Gear 1115
+3 1 byte Lowest Possible Gear 1114
+
+
+pgn65196 - Wheel Brake Lining Remaining Information - EBC4 -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 172
+Default Priority: 7
+Parameter Group Number: 65196 ( 00FEAC 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Brake Lining Remaining, Front Axle, Left Wheel 1099
+2 1 byte Brake Lining Remaining, Front Axle, Right Wheel 1100
+3 1 byte Brake Lining Remaining, Rear Axle #1, Left Wheel 1101
+4 1 byte Brake Lining Remaining, Rear Axle #1, Right Wheel 1102
+5 1 byte Brake Lining Remaining, Rear Axle #2, Left Wheel 1103
+6 1 byte Brake Lining Remaining, Rear Axle #2, Right Wheel 1104
+7 1 byte Brake Lining Remaining, Rear Axle #3, Left Wheel 1105
+8 1 byte Brake Lining Remaining, Rear Axle #3, Right Wheel 1106
+
+
+pgn65197 - Wheel Application Pressure High Range Information - EBC3 -
+Transmission Repetition Rate: 100 ms
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 173
+Default Priority: 6
+Parameter Group Number: 65197 ( 00FEAD 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Brake Application Pressure High Range, Front Axle, Left Wheel 1091
+2 1 byte Brake Application Pressure High Range, Front Axle, Right Wheel 1092
+3 1 byte Brake Application Pressure High Range, Rear Axle #1, Left Wheel 1093
+4 1 byte Brake Application Pressure High Range, Rear Axle #1, Right Wheel 1094
+5 1 byte Brake Application Pressure High Range, Rear Axle #2, Left Wheel 1095
+6 1 byte Brake Application Pressure High Range, Rear Axle #2, Right Wheel 1096
+7 1 byte Brake Application Pressure High Range, Rear Axle #3, Left Wheel 1097
+8 1 byte Brake Application Pressure High Range, Rear Axle #3, Right Wheel 1098
+
+
+pgn65198 - Air Supply Pressure - AIR1 -
+Transmission Repetition Rate: 1 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 174
+Default Priority: 6
+Parameter Group Number: 65198 ( 00FEAE 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Pneumatic Supply Pressure 46
+2 1 byte Parking and/or Trailer Air Pressure 1086
+3 1 byte Service Brake Air Pressure Circuit #1 1087
+4 1 byte Service Brake Air Pressure Circuit #2 1088
+5 1 byte Auxiliary Equipment Supply Pressure 1089
+6 1 byte Air Suspension Supply Pressure 1090
+
+
+pgn65199 - Fuel Consumption (Gaseous) - GFC -
+Transmission Repetition Rate: On request
+
+
+pgn65200 - Trip Time Information 2 - TTI2 -
+Transmission Repetition Rate: On request
+Data Length: 20 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 176
+Default Priority: 7
+Parameter Group Number: 65200 ( 00FEB0 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+01-04 4 bytes Trip Cruise Time 1034
+05-08 4 bytes Trip PTO Time 1035
+09-12 4 bytes Trip Engine Running Time 1036
+13-16 4 bytes Trip Idle Time 1037
+17-20 4 bytes Trip Air Compressor On Time 1038
+
+
+pgn65201 - ECU History - EH -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 177
+Default Priority: 7
+Parameter Group Number: 65201 ( 00FEB1 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-4 4 bytes Total ECU Distance 1032
+5-8 4 bytes Total ECU Run Time 1033
+
+
+pgn65202 - Fuel Information 1 (Gaseous) - GFI1 -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 178
+Default Priority: 7
+Parameter Group Number: 65202 ( 00FEB2 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-4 4 bytes Total Engine PTO Fuel Used (Gaseous) 1030
+5-6 2 bytes Trip Average Fuel Rate (Gaseous) 1031
+7-8 2 bytes Fuel Specific Gravity 1389
+
+
+pgn65203 - Fuel Information (Liquid) - LFI -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 179
+Default Priority: 7
+Parameter Group Number: 65203 ( 00FEB3 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-4 4 bytes Total Engine PTO Fuel Used 1028
+5-6 2 bytes Trip Average Fuel Rate 1029
+
+
+pgn65204 - Trip Time Information 1 - TTI1 -
+Transmission Repetition Rate: On request
+Data Length: 16 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 180
+Default Priority: 7
+Parameter Group Number: 65204 ( 00FEB4 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+01-04 4 bytes Trip Time in VSL 1024
+05-08 4 bytes Trip Time in Top Gear 1025
+09-12 4 bytes Trip Time in Gear Down 1026
+13-16 4 bytes Trip Time in Derate by Engine 1027
+
+
+pgn65205 - Trip Shutdown Information - TSI -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 181
+Default Priority: 7
+Parameter Group Number: 65205 ( 00FEB5 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Trip Number of Hot Shutdowns 1020
+3-4 2 bytes Trip Number of Idle Shutdowns 1021
+5-6 2 bytes Trip Number of Idle Shutdown Overrides 1022
+7-8 2 bytes Trip Sudden Decelerations 1023
+
+
+pgn65206 - Trip Vehicle Speed/Cruise Distance Information - TVI -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 182
+Default Priority: 7
+Parameter Group Number: 65206 ( 00FEB6 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Trip Maximum Vehicle Speed 1018
+3-6 4 bytes Trip Cruise Distance 1019
+
+
+pgn65207 - Engine Speed/Load Factor Information - LF -
+Transmission Repetition Rate: On request
+Data Length: 10 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 183
+Default Priority: 7
+Parameter Group Number: 65207 ( 00FEB7 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Trip Maximum Engine Speed 1013
+3-4 2 bytes Trip Average Engine Speed 1014
+5 1 byte Trip Drive Average Load Factor 1015
+6 1 byte Total Drive Average Load Factor 1016
+7-10 4 bytes Total Engine Cruise Time 1017
+
+
+pgn65208 - Trip Fuel Information (Gaseous) - GTFI -
+Transmission Repetition Rate: On request
+Data Length: 22 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 184
+Default Priority: 7
+Parameter Group Number: 65208 ( 00FEB8 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+01-04 4 bytes Trip Drive Fuel Used (Gaseous) 1007
+05-08 4 bytes Trip PTO Moving Fuel Used (Gaseous) 1008
+09-12 4 bytes Trip PTO Non-moving Fuel Used (Gaseous) 1009
+13-16 4 bytes Trip Vehicle Idle Fuel Used (Gaseous) 1010
+17-20 4 bytes Trip Cruise Fuel Used (Gaseous) 1011
+21-22 2 bytes Trip Drive Fuel Economy (Gaseous) 1012
+
+
+pgn65209 - Trip Fuel Information (Liquid) - LTFI -
+
+
+pgn65210 - Trip Distance Information - TDI -
+Transmission Repetition Rate: On request
+Data Length: 12 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 186
+Default Priority: 7
+Parameter Group Number: 65210 ( 00FEBA )
+16
+Bit Start Position /Bytes Length SPN Description SPN
+1-4 4 bytes Trip Distance on VSL 998
+5-8 4 bytes Trip Gear Down Distance 999
+9-12 4 bytes Trip Distance in Top Gear 1000
+
+
+pgn65211 - Trip Fan Information - TFI -
+Transmission Repetition Rate: On request
+Data Length: 16 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 187
+Default Priority: 7
+Parameter Group Number: 65211 ( 00FEBB 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+01-04 4 bytes Trip Fan On Time 994
+05-08 4 bytes Trip Fan On Time Due to the Engine System 995
+09-12 4 bytes Trip Fan On Time Due to a Manual Switch 996
+13-16 4 bytes Trip Fan On Time Due to the A/C System 997
+
+
+pgn65212 - Compression/Service Brake Information - CBI -
+Transmission Repetition Rate: On request
+Data Length: 16 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 188
+Default Priority: 7
+Parameter Group Number: 65212 ( 00FEBC 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+01-04 4 bytes Total Compression Brake Distance 990
+05-08 4 bytes Trip Compression Brake Distance 991
+09-12 4 bytes Trip Service Brake Distance 992
+13-16 4 bytes Trip Service Brake Applications 993
+
+
+pgn65213 - Fan Drive - FD -
+Transmission Repetition Rate: 1 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 189
+Default Priority: 6
+Parameter Group Number: 65213 ( 00FEBD 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Estimated Percent Fan Speed 975
+2.1 4 bits Fan Drive State 977
+3-4 2 bytes Fan Speed 1639
+This parameter group transfers status and measured information on the engine coolant fan.
+
+
+pgn65214 - Electronic Engine Controller 4 - EEC4 -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 190
+Default Priority: 7
+Parameter Group Number: 65214 ( 00FEBE 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Rated Engine Power 166
+3-4 2 bytes Rated Engine Speed 189
+
+
+pgn65215 - Wheel Speed Information - EBC2 -
+Transmission Repetition Rate: 100 ms
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 191
+Default Priority: 6
+Parameter Group Number: 65215 ( 00FEBF 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Front Axle Speed 904
+3 1 byte Relative Speed; Front Axle, Left Wheel 905
+4 1 byte Relative Speed; Front Axle, Right Wheel 906
+5 1 byte Relative Speed; Rear Axle #1, Left Wheel 907
+6 1 byte Relative Speed; Rear Axle #1, Right Wheel 908
+7 1 byte Relative Speed; Rear Axle #2, Left Wheel 909
+8 1 byte Relative Speed; Rear Axle #2, Right Wheel 910
+
+
+pgn65216 - Service Information - SERV -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes or variable bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 192
+Default Priority: 6
+Parameter Group Number: 65216 ( 00FEC0 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Service Component Identification 911
+2-3 2 bytes Service Distance 914
+4 1 byte Service Component Identification 912
+5 1 byte Service Delay/Calendar Time Based 915
+6 1 byte Service Component Identification 913
+7-8 2 bytes Service Delay/Operational Time Based 916
+Transmitted with the service component identification that has the shortest distance or nearest time until the next service inspection.
+NOTE - There are two acceptable formats for the Service PGN. Format 1 has only 8 bytes of data and reports the component most in
+need of service for each of the three categories. Format 2, however, uses the transport layer as necessary in order to repeat these 8 bytes
+of service component information until all supported service components in each category have been transmitted.
+
+
+pgn65217 - High Resolution Vehicle Distance - VDHR -
+Transmission Repetition Rate: 1 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 193
+Default Priority: 6
+Parameter Group Number: 65217 ( 00FEC1 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-4 4 bytes High Resolution Total Vehicle Distance 917
+5-8 4 bytes High Resolution Trip Distance 918
+
+
+pgn65218 - Electronic Retarder Controller 2 - ERC2 -
+Transmission Repetition Rate: 1 s when active; or on change of state
+Data Length: 8 bytes
+Data Page: 0
+
+
+pgn65219 - Electronic Transmission Controller 5 - ETC5 -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 195
+Default Priority: 7
+Parameter Group Number: 65219 ( 00FEC3 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1.1 2 bits Transmission High Range Sense Switch 778
+1.3 2 bits Transmission Low Range Sense Switch 779
+2.1 2 bits Transmission Reverse Direction Switch 767
+2.3 2 bits Transmission Neutral Switch 604
+2.5 2 bits Transmission Forward Direction Switch 903
+
+
+pgn65221 - Electronic Transmission Controller 4 - ETC4 -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 197
+Default Priority: 7
+Parameter Group Number: 65221 ( 00FEC5 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Transmission Synchronizer Clutch Value 53
+2 1 byte Transmission Synchronizer Brake Value 54
+
+
+pgn65223 - Electronic Transmission Controller 3 - ETC3 -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 199
+Default Priority: 7
+Parameter Group Number: 65223 ( 00FEC7 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Shift Finger Gear Position 59
+2 1 byte Shift Finger Rail Position 60
+3.1 2 bits Shift Finger Neutral Indicator 780
+3.3 2 bits Shift Finger Engagement Indicator 781
+3.5 2 bits Shift Finger Center Rail Indicator 782
+4.1 2 bits Shift Finger Rail Actuator 1 772
+4.3 2 bits Shift Finger Gear Actuator 1 773
+4.5 2 bits Shift Finger Rail Actuator 2 783
+4.7 2 bits Shift Finger Gear Actuator 2 784
+5.1 2 bits Range High Actuator 768
+5.3 2 bits Range Low Actuator 769
+5.5 2 bits Splitter Direct Actuator 770
+5.7 2 bits Splitter Indirect Actuator 771
+6.1 2 bits Clutch Actuator 788
+6.3 2 bits Lockup Clutch Actuator 740
+6.5 2 bits Defuel Actuator 786
+6.7 2 bits Inertia Brake Actuator 787
+
+
+pgn65237 - Alternator Speed - AS -
+Transmission Repetition Rate: 1 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 213
+Default Priority: 6
+Parameter Group Number: 65237 ( 00FED5 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Alternator Speed 589
+
+
+pgn65241 - Auxiliary Input/Output Status - AUXIO -
+Transmission Repetition Rate: manufacturer defined, not faster than 100 ms
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 217
+Default Priority: 6
+Parameter Group Number: 65241 ( 00FED9 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1.1 2 bits Auxiliary I/O #04 704
+1.3 2 bits Auxiliary I/O #03 703
+1.5 2 bits Auxiliary I/O #02 702
+1.7 2 bits Auxiliary I/O #01 701
+2.1 2 bits Auxiliary I/O #08 708
+2.3 2 bits Auxiliary I/O #07 707
+2.5 2 bits Auxiliary I/O #06 706
+2.7 2 bits Auxiliary I/O #05 705
+3.1 2 bits Auxiliary I/O #12 712
+3.3 2 bits Auxiliary I/O #11 711
+3.5 2 bits Auxiliary I/O #10 710
+3.7 2 bits Auxiliary I/O #09 709
+4.1 2 bits Auxiliary I/O #16 716
+4.3 2 bits Auxiliary I/O #15 715
+4.5 2 bits Auxiliary I/O #14 714
+4.7 2 bits Auxiliary I/O #13 713
+5-6 2 bytes Auxiliary I/O Channel #1 1083
+7-8 2 bytes Auxiliary I/O Channel #2 1084
+
+
+pgn65242 - Software Identification - SOFT -
+Transmission Repetition Rate: On request
+Data Length: Variable bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 218
+Default Priority: 6
+Parameter Group Number: 65242 ( 00FEDA 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Number of Software Identification Fields 965
+2-N Variable - up to Software Identification 234
+200 characters
+("*" delimited)
+Byte: 1 Number of software identification fields 2-n Software identification(s) Delimiter (ASCII '*') NOTE- The software identification
+field is variable in length and may contain up to 125 software identification designators. An ASCII '*' is used as a delimiter to separate
+multiple software identifications. Additional software identification fields may be added at the end, each separated by an ASCII '*' as a
+delimiter. An ASCII '*' is required at the end of the last software identification field, even if there is only one software identification
+designator.
+
+
+pgn65243 - Engine Fluid Level/Pressure 2 - EFL/P2 -
+Transmission Repetition Rate: 0.5 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 219
+Default Priority: 6
+Parameter Group Number: 65243 ( 00FEDB 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Injection Control Pressure 164
+3-4 2 bytes Injector Metering Rail 1 Pressure 157
+5-6 2 bytes Injector Timing Rail 1 Pressure 156
+7-8 2 bytes Injector Metering Rail 2 Pressure 1349
+
+
+pgn65244 - Idle Operation - IO -
+Transmission Repetition Rate: On request
+
+
+pgn65245 - Turbocharger - TC -
+Transmission Repetition Rate: 1 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 221
+Default Priority: 6
+Parameter Group Number: 65245 ( 00FEDD 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Turbocharger Lube Oil Pressure 1 104
+2-3 2 bytes Turbocharger 1 Speed 103
+4.7 2 bits Turbo Oil Level Switch 1665
+
+
+pgn65246 - Air Start Pressure - AIR2 -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 222
+Default Priority: 6
+Parameter Group Number: 65246 ( 00FEDE 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Air Start Pressure 82
+
+
+pgn65247 - Electronic Engine Controller 3 - EEC3 -
+Transmission Repetition Rate: 250 msecs
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 223
+Default Priority: 6
+Parameter Group Number: 65247 ( 00FEDF 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Nominal Friction - Percent Torque 514
+2-3 2 bytes Engine's Desired Operating Speed 515
+4 1 byte Engine's Desired Operating Speed Asymmetry Adjustment 519
+
+
+pgn65248 - Vehicle Distance - VD -
+Transmission Repetition Rate: 100 ms
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 224
+Default Priority: 6
+Parameter Group Number: 65248 ( 00FEE0 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-4 4 bytes Trip Distance 244
+5-8 4 bytes Total Vehicle Distance 245
+
+
+pgn65249 - Retarder Configuration - RC -
+Transmission Repetition Rate: On change of torque/speed points of more than 10% since last transmission, or every 5 s.
+Data Length: 19 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 225
+Default Priority: 6
+Parameter Group Number: 65249 ( 00FEE1 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+01.1 4 bits Retarder Type 901
+01.5 4 bits Retarder Location 902
+02 1 byte Retarder Control Method (Retarder Configuration) 557
+03-04 2 bytes Retarder Speed At Idle, Point 1 (Retarder Configuration) 546
+05 1 byte Percent Torque At Idle, Point 1 (Retarder Configuration) 551
+06-07 2 bytes Maximum Retarder Speed, Point 2 (Retarder Configuration) 548
+08 1 byte Percent Torque At Maximum Speed, Point 2 (Retarder Configuration) 552
+09-10 2 bytes Retarder Speed At Point 3 (Retarder Configuration) 549
+11 1 byte Percent Torque At Point 3 (Retarder Configuration) 553
+12-13 2 bytes Retarder Speed At Point 4 (Retarder Configuration) 550
+14 1 byte Percent Torque At Point 4 (Retarder Configuration) 554
+15-16 2 bytes Retarder Speed At Peak Torque, Point 5 (Retarder Configuration) 547
+17-18 2 bytes Reference Retarder Torque (Retarder Configuration) 556
+19 1 byte Percent Torque At Peak Torque, Point 5 (Retarder Configuration) 555
+This map describes the stationary behavior of the retarder.
+FIGURE PGN65249_A -- TYPICAL HYDRAULIC RETARDER TORQUE CURVE
+FIGURE PGN65249_B -- TYPICAL ENGINE COMPRESSION BRAKE TORQUE CURVE
+
+
+pgn65250 - Transmission Configuration - TCFG -
+Transmission Repetition Rate: On request
+Data Length: Variable bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 226
+Default Priority: 6
+Parameter Group Number: 65250 ( 00FEE2 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Number of Reverse Gear Ratios 958
+2 1 byte Number of Forward Gear Ratios 957
+3-4 2 bytes Transmission Gear Ratio 581
+Total message length depends on total number of forward and reverse gear ratios.
+
+
+pgn65251 - Engine Configuration - EC -
+Transmission Repetition Rate: On change of torque/speed points of more than 10% since last transmission. Alternatively , or every 5 s.
+Data Length: 34 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 227
+Default Priority: 6
+Parameter Group Number: 65251 ( 00FEE3 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Engine Speed At Idle, Point 1 (Engine Configuration) 188
+3 1 byte Percent Torque At Idle, Point 1 (Engine Configuration) 539
+4-5 2 bytes Engine Speed At Point 2 (Engine Configuration) 528
+6 1 byte Percent Torque At Point 2 (Engine Configuration) 540
+7-8 2 bytes Engine Speed At Point 3 (Engine Configuration) 529
+9 1 byte Percent Torque At Point 3 (Engine Configuration) 541
+10-11 2 bytes Engine Speed At Point 4 (Engine Configuration) 530
+12 1 byte Percent Torque At Point 4 (Engine Configuration) 542
+13-14 2 bytes Engine Speed At Point 5 (Engine Configuration) 531
+15 1 byte Percent Torque At Point 5 (Engine Configuration) 543
+16-17 2 bytes Engine Speed At High Idle, Point 6 (Engine Configuration) 532
+18-19 2 bytes Gain (Kp) Of The Endspeed Governor (Engine Configuration) 545
+20-21 2 bytes Reference Engine Torque (Engine Configuration) 544
+22-23 2 bytes Maximum Momentary Engine Override Speed, Point 7 (Engine Configuration) 533
+24 1 byte Maximum Momentary Override Time Limit (Engine Configuration) 534
+25 1 byte Requested Speed Control Range Lower Limit (Engine Configuration) 535
+26 1 byte Requested Speed Control Range Upper Limit (Engine Configuration) 536
+27 1 byte Requested Torque Control Range Lower Limit (Engine Configuration) 537
+28 1 byte Requested Torque Control Range Upper Limit (Engine Configuration) 538
+29-30 2 bytes Extended Range Requested Speed Control Range Upper Limit (Engine 1712
+configuration)
+31-32 2 bytes Engine Moment of Inertia 1794
+33-34 2 bytes Default Engine Torque Limit 1846
+This map describes the stationary behavior of the engine and the speed dependent available indicated torque. This map should reflect
+the effect of changes due to barometric pressure, engine temperature, and any other stationary changes (sensor failures, etc.) which
+influence the engine torque curve more than 10%. This map is only valid for maximum boost pressure. At low boost pressures the
+torque limit may be much lower. The engine configuration message must be sent at any time that the engine configuration map has
+changed by more than 10% of speed or torque (due to events other than boost pressure) since that last time the message was transmitted.
+As an alternative, it may be sent periodically, once every 5 s. It shall also be sent on response to a configuration request message. The
+engine characteristic can be described in one of three modes. Mode 1 provides a complete curve of speed and torque points (see Figure
+9). Modes 2 and 3 provide a partial curve of speed and torque points and a separate endspeed governor characteristic. In modes 2 and 3,
+the receiver of the engine configuration message has to calculate the minimum of the engine torque curve and the endspeed governor
+characteristic to get the final available engine torque. Mode 2 provides a high idle point where torque equals zero (point 6) and the
+endspeed governor gain Kp (see Figure 10). Mode 3 provides the kick-in point of the endspeed governor (point 2) and the governor
+gain Kp (see Figure 11). The selection of the three modes can be done by setting the parameters as shown in Table 14.
+TABLE PGN65251_A -- ENGINE CONFIGURATION CHARACTERISTIC MODES
+FIGURE PGN65251_A -- ENGINE CONFIGURATION MAP-MODE 1
+
+
+pgn65252 - Shutdown - SHUTDOWN -
+Transmission Repetition Rate: 1 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 228
+Default Priority: 6
+Parameter Group Number: 65252 ( 00FEE4 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1.1 2 bits Idle Shutdown has Shutdown Engine 593
+1.3 2 bits Idle Shutdown Driver Alert Mode 594
+1.5 2 bits Idle Shutdown Timer Override 592
+1.7 2 bits Idle Shutdown Timer State 590
+2.7 2 bits Idle Shutdown Timer Function 591
+3.1 2 bits A/C High Pressure Fan Switch 985
+3.3 2 bits Refrigerant Low Pressure Switch 875
+3.5 2 bits Refrigerant High Pressure Switch 605
+4.1 2 bits Wait to Start Lamp 1081
+5.1 2 bits Engine Protection System has Shutdown Engine 1110
+5.3 2 bits Engine Protection System Approaching Shutdown 1109
+5.5 2 bits Engine Protection System Timer Override 1108
+5.7 2 bits Engine Protection System Timer State 1107
+6.7 2 bits Engine Protection System Configuration 1111
+
+
+pgn65253 - Engine Hours, Revolutions - HOURS -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 229
+Default Priority: 6
+Parameter Group Number: 65253 ( 00FEE5 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-4 4 bytes Total Engine Hours 247
+5-8 4 bytes Total Engine Revolutions 249
+
+
+pgn65254 - Time/Date - TD -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 230
+Default Priority: 6
+Parameter Group Number: 65254 ( 00FEE6 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Seconds 959
+2 1 byte Minutes 960
+3 1 byte Hours 961
+4 1 byte Month 963
+5 1 byte Day 962
+6 1 byte Year 964
+7 1 byte Local minute offset 1601
+8 1 byte Local hour offset 1602
+
+
+pgn65255 - Vehicle Hours - VH -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 231
+Default Priority: 6
+Parameter Group Number: 65255 ( 00FEE7 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-4 4 bytes Total Vehicle Hours 246
+5-8 4 bytes Total Power Takeoff Hours 248
+
+
+pgn65256 - Vehicle Direction/Speed - VDS -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+
+
+pgn65257 - Fuel Consumption (Liquid) - LFC -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 233
+Default Priority: 6
+Parameter Group Number: 65257 ( 00FEE9 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-4 4 bytes Trip Fuel 182
+5-8 4 bytes Total Fuel Used 250
+
+
+pgn65258 - Vehicle Weight - VW -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 234
+Default Priority: 6
+Parameter Group Number: 65258 ( 00FEEA 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 8 bits Axle Location 928
+2-3 2 bytes Axle Weight 582
+4-5 2 bytes Trailer Weight 180
+6-7 2 bytes Cargo Weight 181
+NOTE: Request has to be responded to with as many messages as necessary to transmit all available information.
+
+
+pgn65259 - Component Identification - CI -
+Transmission Repetition Rate: On request
+Data Length: Variable bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 235
+Default Priority: 6
+Parameter Group Number: 65259 ( 00FEEB 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+a 5 bytes Make 586
+b Variable - up to Model 587
+200 characters
+("*" delimited)
+c Variable - up to Serial Number 588
+200 characters
+("*" delimited)
+d Variable - up to Unit Number (Power Unit) 233
+200 characters
+("*" delimited)
+NOTE - The make, model, serial number and unit number fields in this message are optional and separated by an ASCII "*". It is not
+necessary to include all fields; however, the delimiter ("*") is always required.
+Field:
+a Make
+Delimiter (ASCII "*")
+b Model
+Delimiter (ASCII "*")
+c Serial number
+Delimiter (ASCII "*")
+d Unit number (Power unit)
+Delimiter (ASCII "*")
+
+
+pgn65260 - Vehicle Identification - VI -
+Transmission Repetition Rate: On request
+Data Length: Variable bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 236
+Default Priority: 6
+Parameter Group Number: 65260 ( 00FEEC 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 Variable - up to Vehicle Identification Number 237
+200 characters
+("*" delimited)
+Byte: 1-n Vehicle Identification Number Delimiter (ASCII "*")
+
+
+pgn65261 - Cruise Control/Vehicle Speed Setup - CCSS -
+Transmission Repetition Rate: On request
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 237
+Default Priority: 6
+Parameter Group Number: 65261 ( 00FEED 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Maximum Vehicle Speed Limit 74
+2 1 byte Cruise Control High Set Limit Speed 87
+3 1 byte Cruise Control Low Set Limit Speed 88
+
+
+pgn65262 - Engine Temperature 1 - ET1 -
+Transmission Repetition Rate: 1 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 238
+Default Priority: 6
+Parameter Group Number: 65262 ( 00FEEE 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Engine Coolant Temperature 110
+2 1 byte Fuel Temperature 174
+3-4 2 bytes Engine Oil Temperature 1 175
+5-6 2 bytes Turbo Oil Temperature 176
+7 1 byte Engine Intercooler Temperature 52
+8 1 byte Engine Intercooler Thermostat Opening 1134
+
+
+pgn65263 - Engine Fluid Level/Pressure 1 - EFL/P1 -
+Transmission Repetition Rate: 0.5 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 239
+Default Priority: 6
+Parameter Group Number: 65263 ( 00FEEF 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Fuel Delivery Pressure 94
+2 1 byte Extended Crankcase Blow-by Pressure 22
+3 1 byte Engine Oil Level 98
+4 1 byte Engine Oil Pressure 100
+5-6 2 bytes Crankcase Pressure 101
+7 1 byte Coolant Pressure 109
+8 1 byte Coolant Level 111
+
+
+pgn65264 - Power Takeoff Information - PTO -
+Transmission Repetition Rate: 100 ms
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 240
+Default Priority: 6
+Parameter Group Number: 65264 ( 00FEF0 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Power Takeoff Oil Temperature 90
+
+
+pgn65265 - Cruise Control/Vehicle Speed - CCVS -
+Transmission Repetition Rate: 100 ms
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 241
+Default Priority: 6
+Parameter Group Number: 65265 ( 00FEF1 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1.1 2 bits Two Speed Axle Switch 69
+1.3 2 bits Parking Brake Switch 70
+1.5 2 bits Cruise Control Pause Switch 1633
+2-3 2 bytes Wheel-Based Vehicle Speed 84
+4.1 2 bits Cruise Control Active 595
+4.3 2 bits Cruise Control Enable Switch 596
+4.5 2 bits Brake Switch 597
+4.7 2 bits Clutch Switch 598
+5.1 2 bits Cruise Control Set Switch 599
+5.3 2 bits Cruise Control Coast (Decelerate) Switch 600
+5.5 2 bits Cruise Control Resume Switch 601
+5.7 2 bits Cruise Control Accelerate Switch 602
+6 1 byte Cruise Control Set Speed 86
+7.1 5 bits PTO State 976
+7.6 3 bits Cruise Control States 527
+8.1 2 bits Idle Increment Switch 968
+8.3 2 bits Idle Decrement Switch 967
+8.5 2 bits Engine Test Mode Switch 966
+8.7 2 bits Engine Shutdown Override Switch 1237
+
+
+pgn65266 - Fuel Economy (Liquid) - LFE -
+Transmission Repetition Rate: 100 ms
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 242
+Default Priority: 6
+Parameter Group Number: 65266 ( 00FEF2 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-2 2 bytes Fuel Rate 183
+3-4 2 bytes Instantaneous Fuel Economy 184
+5-6 2 bytes Average Fuel Economy 185
+7 1 byte Throttle Position 51
+
+
+pgn65267 - Vehicle Position - VP -
+Transmission Repetition Rate: 5 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 243
+Default Priority: 6
+Parameter Group Number: 65267 ( 00FEF3 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1-4 4 bytes Latitude 584
+5-8 4 bytes Longitude 585
+
+
+pgn65268 - Tire Condition - TIRE -
+Transmission Repetition Rate: 10 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 244
+Default Priority: 6
+Parameter Group Number: 65268 ( 00FEF4 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 8 bits Tire Location 929
+2 1 byte Tire Pressure 241
+3-4 2 bytes Tire Temperature 242
+5.1 2 bits CTI Wheel Sensor Status 1699
+5.3 2 bits CTI Tire Status 1698
+5.5 2 bits CTI Wheel End Electrical Fault 1697
+6-7 2 bytes Tire Air Leakage Rate 2586
+8.6 3 bits Tire Pressure Threshold Detection 2587
+Tire Condition Message NOTE: Message has to repeated as necessary to transmit all available information. This method of location
+identification requires individual SPNs to be assigned to report failures specific to each individual component (I.e. each tire, each axle,
+etc.).
+
+
+pgn65269 - Ambient Conditions - AMB -
+Transmission Repetition Rate: 1 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 245
+Default Priority: 6
+Parameter Group Number: 65269 ( 00FEF5 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Barometric Pressure 108
+2-3 2 bytes Cab Interior Temperature 170
+4-5 2 bytes Ambient Air Temperature 171
+6 1 byte Air Inlet Temperature 172
+7-8 2 bytes Road Surface Temperature 79
+
+
+pgn65270 - Inlet/Exhaust Conditions 1 - IC1 -
+Transmission Repetition Rate: 0.5 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 246
+Default Priority: 6
+Parameter Group Number: 65270 ( 00FEF6 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Particulate Trap Inlet Pressure 81
+2 1 byte Boost Pressure 102
+3 1 byte Intake Manifold 1 Temperature 105
+4 1 byte Air Inlet Pressure 106
+5 1 byte Air Filter 1 Differential Pressure 107
+6-7 2 bytes Exhaust Gas Temperature 173
+8 1 byte Coolant Filter Differential Pressure 112
+
+
+pgn65271 - Vehicle Electrical Power - VEP -
+Transmission Repetition Rate: 1 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 247
+Default Priority: 6
+Parameter Group Number: 65271 ( 00FEF7 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Net Battery Current 114
+2 1 byte Alternator Current 115
+3-4 2 bytes Alternator Potential (Voltage) 167
+5-6 2 bytes Electrical Potential (Voltage) 168
+7-8 2 bytes Battery Potential (Voltage), Switched 158
+
+
+pgn65272 - Transmission Fluids - TF -
+Transmission Repetition Rate: 1 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 248
+Default Priority: 6
+Parameter Group Number: 65272 ( 00FEF8 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Clutch Pressure 123
+2 1 byte Transmission Oil Level 124
+3 1 byte Transmission Filter Differential Pressure 126
+4 1 byte Transmission Oil Pressure 127
+5-6 2 bytes Transmission Oil Temperature 177
+
+
+pgn65273 - Axle Information - AI -
+Transmission Repetition Rate: 1 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 249
+Default Priority: 6
+Parameter Group Number: 65273 ( 00FEF9 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Steering Axle Temperature 75
+2 8 bits Drive Axle Location 930
+3 1 byte Drive Axle Lift Air Pressure 579
+4 1 byte Drive Axle Temperature 578
+5 1 byte Drive Axle Lube Pressure 2613
+8 1 byte Steering Axle Lube Pressure 2614
+Axle information message NOTE: Message must be repeated as necessary to transmit all available information. This method of location
+identification requires individual SPNs to be assigned to report failures specific to each individual component (I.e. each tire, each axle,
+etc.).
+
+
+pgn65274 - Brakes - B -
+Transmission Repetition Rate: 1 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 250
+Default Priority: 6
+Parameter Group Number: 65274 ( 00FEFA 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Brake Application Pressure 116
+2 1 byte Brake Primary Pressure 117
+3 1 byte Brake Secondary Pressure 118
+4.1 2 bits Parking Brake Actuator 619
+
+
+pgn65275 - Retarder fluids - RF -
+Transmission Repetition Rate: 1 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 251
+Default Priority: 6
+Parameter Group Number: 65275 ( 00FEFB 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Hydraulic Retarder Pressure 119
+2 1 byte Hydraulic Retarder Oil Temperature 120
+
+
+pgn65276 - Dash Display - DD -
+Transmission Repetition Rate: 1s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 252
+Default Priority: 6
+Parameter Group Number: 65276 ( 00FEFC 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Washer Fluid Level 80
+2 1 byte Fuel Level 96
+3 1 byte Fuel Filter Differential Pressure 95
+4 1 byte Engine Oil Filter Differential Pressure 99
+5-6 2 bytes Cargo Ambient Temperature 169
+
+
+pgn65277 - Alternate Fuel 1 - A1 -
+Transmission Repetition Rate: 500 ms
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
+PDU Specific: 253
+Default Priority: 6
+Parameter Group Number: 65277 ( 00FEFD 16 )
+Bit Start Position /Bytes Length SPN Description SPN
+1 1 byte Blower Bypass Valve Position 72
+2-3 2 bytes Gas Supply Pressure 159
+
+
+pgn65278 - Auxiliary Water Pump Pressure - AWPP -
+Transmission Repetition Rate: 1 s
+Data Length: 8 bytes
+Data Page: 0
+PDU Format: 254
