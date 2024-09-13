@@ -1,6 +1,7 @@
 
 import pandas as pd
 import numpy as np
+from datetime import datetime
 
 from settings import *
 import matplotlib.colors as color_plt
@@ -23,6 +24,8 @@ SPN_Range = {}
 # SPN_Range[SPN] = Value to Value (tuple)
 SPN_Name = {}
 
+AX_Interval = {}
+
 COLOR_C = dict([('C%d' % i, list(map(lambda x: x*255, color_plt.ColorConverter().to_rgba('C%d' % i)))) for i in range(20)])
 
 def get_pgn_unique(data):
@@ -37,12 +40,13 @@ def get_pgn_unique(data):
 def find_pgn_info(pgn):
     """ Функция получения информации о PGN из документации """
     text = FILE_PGN
-    res = text.find(f"pgn{pgn}")
+    f_str = f"PGN {pgn}"
+    res = text.find(f_str)
     if res != -1:
         text = text[res:]
         info = text[:text.find("\n\n")]
         first_line = text[:text.find('\n')]
-        name = first_line[first_line.find('-') + 1:first_line.rfind('-')].strip()
+        name = first_line[len(f_str):].strip()
         list_spn = pars_spn(info, pgn)
     else:
         return 0
@@ -52,7 +56,7 @@ def find_pgn_info(pgn):
 
 def pars_spn(text : str, pgn : int):
     """ Функция парсит все SPN и позицию бит/байт из информации о PGN """
-    text = text[text.find("Description SPN"):]
+    text = text[text.find("Name SPN"):]
     spn_result = []
     for line in text.split('\n')[1:]:
         if line[0].isdigit():
@@ -92,26 +96,32 @@ def get_URO(spn):
     SPN_Range[spn], range_value = None, None
 
     text = FILE_SPN
-    res = text.find(f"spn{spn}")
+    res = text.find(f"SPN {spn} ")
     if res != -1:
         text = text[res:]
         info = text[:text.find("\n\n")]
 
         for line in info.split('\n'):
-            if "Resolution:" in line:
-                resolution = line.split()[1].replace('/bit', '')
+            if "Resolution:" in line and "states" not in line:
+                resolution = line.split()[1]\
+                    .replace('/bit', '')\
+                    .replace('%', '')\
+                    .replace(',', '')
                 try:
                     resolution = eval(resolution) if '/' in resolution else float(resolution)
                 except:
                     print(f"ERROR: {line}")
                     resolution = None
-                offset_value = line.split(' , ')[-1]
+                offset_value = line.split(', ')[-1]
                 if "offset" in line:
                     try:
                         offset_value = float(offset_value.split()[0])
                     except ValueError:
                         s = ''.join([i for i in offset_value.split()[0] if i.isdigit() or i == '-'])
-                        offset_value = float(s)
+                        try:
+                            offset_value = float(s)
+                        except:
+                            print(s,' ::: ',  line)
 
             if "Data Range:" in line:
                 line_range = list(line.replace(',', '').split())
@@ -182,22 +192,16 @@ def load_file(file_name):
 
     def extract_pgn(packet_id):
         return int(packet_id[2:6], 16)
-    try:
-        if ".csv" not in file_name:
-            raise TypeError
-        data = pd.read_csv(file_name, sep=";")
-        data["PGN"] = data.iloc[:, 0].apply(extract_pgn)
-    except:
-        print("ERROR: process_file()")
-        return 0
+    data = pd.read_csv(file_name, sep=";")
+    data["PGN"] = data.iloc[:, 0].apply(extract_pgn)
+    
     return data
 
 
 def extract_value(filter_data, type_pos : str, array_pos : list):
     """ Достаем необходимые значения из данных для построения графиков
         array_pos задает маску, по которой извлекаем необходимое """
-    datetime = filter_data.iloc[:, -2].apply(lambda x: x[:x.find('.')]).rename("DateTime")
-
+    datetime = filter_data.iloc[:, -2].apply(lambda x: x[:x.rfind('.')] if '.' in x else x).rename("DateTime")
     def hex_to_bin(x):
         res = bin(int(x, 16))[2:]
         length = len(res)
@@ -250,3 +254,8 @@ def extract_value_message(s: str):
     time = s[s.rfind('(')+1:s.rfind(',')]
     values = list(map( lambda x: x[:x.find(')')], s[7:].split(', ') ))
     return time, values[1:]
+
+def time_to_seconds(time_str):
+    """Преобразует строку времени в формате HH:MM:SS в количество секунд."""
+    h, m, s = map(int, time_str.split(':'))
+    return h * 3600 + m * 60 + s

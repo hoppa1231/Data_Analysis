@@ -14,9 +14,9 @@ INFO_WEIGHT = 250                       # Ширина информационн�
 
 SIZE_DIALOG_CHOOSE = (400, 500)         # Размер диалогового окна Выбор SPN
 
-PATH_FILE_SPN = "data/SPN_parts.txt"    # Путь до SPN выжимки
+PATH_FILE_SPN = "data/SPN_parts(1).txt"    # Путь до SPN выжимки
 
-PATH_FILE_PGN = "data/PGN_parts.txt"    # Путь до PGN выжимки
+PATH_FILE_PGN = "data/PGN_parts(1).txt"    # Путь до PGN выжимки
 
 EXTEND_ERRORBAR = None                  # Отрисовка доверительной вероятности
 
@@ -24,5 +24,5 @@ DPI_SAVE = 300                          # Качество сохраненно�
 
 PATH_ICON = "interface/icon/"
 
-FILE_SPN = ''.join(open(PATH_FILE_SPN).readlines())
-FILE_PGN = ''.join(open(PATH_FILE_PGN).readlines())
+FILE_SPN = ''.join(open(PATH_FILE_SPN, encoding="utf-8").readlines())
+FILE_PGN = ''.join(open(PATH_FILE_PGN, encoding="utf-8").readlines())

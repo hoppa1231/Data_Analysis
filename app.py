@@ -22,6 +22,7 @@ from toolbarQT import NavigationToolbar
 
 from settings import *
 from extend import *
+from translater import translate_to_russian
 
 
 class UiMainWindow(object):
@@ -29,6 +30,7 @@ class UiMainWindow(object):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
         MainWindow.resize(*SIZE_WINDOW)
+        MainWindow.setWindowIcon(QIcon(PATH_ICON + 'icon_ptz_graph.ico'))
 
         ''' Меню -> Файл -> Открыть файл '''
         self.actionOpen_File = QAction(MainWindow)
@@ -232,6 +234,11 @@ class UiMainWindow(object):
             if info:
                 self.pgn_info[pgn] = info
                 count_detected_pgn += 1
+            else:
+                if 65280 <= pgn <= 65535:
+                    print('+', pgn)
+                else:
+                    print(pgn)
         self.info_label.setText(f"Опознано {count_detected_pgn} из {count_pgn} PGN")
 
         self.choose_pgn()
@@ -347,11 +354,12 @@ class UiMainWindow(object):
         sns.set()
 
         self.canvas = FigureCanvas(self.fig)
-        self.toolbar = NavigationToolbar(self.canvas, self.widget_tools)
+        self.toolbar = NavigationToolbar(self.canvas, self.data.iloc[:, -2][0][:8], self.widget_tools)
 
         count_graph = sum(SPN_Select.values())
         flag_side = True
         index_graph = -1
+        combined_df = pd.DataFrame()
 
         for i, (spn, selected) in enumerate(SPN_Select.items()):
             if selected:
@@ -371,7 +379,8 @@ class UiMainWindow(object):
                 type_pos, array_pos = descript_position(pos)
                 filter_data = filter_data_pgn(self.data, pgn)
 
-                result_data = extract_value(filter_data, type_pos, array_pos)
+                result_data = extract_value(filter_data, type_pos, array_pos).drop_duplicates()
+                result_data = result_data.groupby('DateTime').agg(lambda x: x.mode()[0]).reset_index()
                 ''' Получили нужные дынные, уходим от битов и переходим к значениям '''
                 if resolution is not None:
                     result_data["Value"] *= resolution
@@ -417,8 +426,19 @@ class UiMainWindow(object):
                     y_max, y_min = find_y_lim(result_data, index_graph, count_graph)
                     ax_new.set_ylim(y_min, y_max)
 
+                AX_Interval[name] = (y_max, y_min)
+                result_data = result_data.rename(columns={"Value": name})
+                # Если комбинированный DataFrame пустой, просто копируем данные
+                if combined_df.empty:
+                    combined_df = result_data
+                else:
+                    # Иначе объединяем по столбцу DateTime
+                    combined_df = pd.merge(combined_df, result_data, on="DateTime", how="outer")
+
         self.ax.set_xlabel('Дата и время', fontsize=10)
-        self.ax.xaxis.set_major_locator(MaxNLocator(MainWindow.width()//125))
+        scaler_x = len(combined_df["DateTime"][0]) * 12
+        self.ax.xaxis.set_major_locator(MaxNLocator(MainWindow.width()//scaler_x))
+        self.toolbar.setData(combined_df)
 
         for ax in self.fig.axes:
             ax.set_xlabel('')
@@ -431,6 +451,7 @@ class UiMainWindow(object):
         self.areaPlot_layout.addWidget(self.canvas)
         self.widget_tools_layout.addWidget(self.toolbar)
         self.legend_bar()
+        self.canvas.draw()
 
     def clear_area(self):
         """ Очищает виджет полотна от старого графика """
@@ -475,23 +496,60 @@ class UiMainWindow(object):
         self.legendWidget_layout.addWidget(self.legend_list)
         self.legend_list.itemSelectionChanged.connect(self.click_legend)
 
-        # self.legend_descript = QLabel()
-        # self.legendWidget_layout.addWidget(self.legend_descript)
-        # TODO: Доделать легенду, добавить кнопки управления
+        self.header_descript = QWidget()
+        self.header_descript_layout = QHBoxLayout()
+        self.header_descript.setLayout(self.header_descript_layout)
+
+        self.title_descript = QLabel(u"Описание SPN")
+        self.descript_translate_button = QPushButton(u"Перевести")
+        self.descript_translate_button.clicked.connect(self.click_btn_translate)
+
+        self.header_descript_layout.addWidget(self.title_descript)
+        self.header_descript_layout.addWidget(self.descript_translate_button)
+
+
+        self.legendWidget_layout.addWidget(self.header_descript)
+
+        self.legend_scroll_descript = QScrollArea()
+        self.legend_descript = QLabel()
+        self.legend_descript.setMargin(5)
+        self.legend_descript.setStyleSheet("background: 'white'")
+        self.legend_scroll_descript.setWidgetResizable(True)
+
+        self.legendWidget_layout.addWidget(self.legend_scroll_descript)
+        self.legend_scroll_descript.setWidget(self.legend_descript)
 
     def click_legend(self):
         self.select_graph = self.legend_list.currentItem().text()
         for ax in self.fig.axes:
-            if self.select_graph not in ax.get_legend_handles_labels()[1][0]:
-                ax.tick_params(axis='y', labelleft=False, labelright=False)
-                ax.grid(visible=False)
-            else:
-                ax.tick_params(axis='y', labelleft=True, labelright=True)
-                ax.grid(visible=True)
-
-        if self.select_graph not in self.ax.get_legend_handles_labels()[1][0]:
-            self.ax.grid(axis='x')
+            try:
+                if self.select_graph not in ax.get_legend_handles_labels()[1][0]:
+                    ax.tick_params(axis='y', labelleft=False, labelright=False)
+                    ax.grid(visible=False)
+                else:
+                    ax.tick_params(axis='y', labelleft=True, labelright=True)
+                    ax.grid(visible=True)
+            except IndexError:
+                print("ERROR: ", ax.get_legend_handles_labels())
+        try:
+            if self.select_graph not in self.ax.get_legend_handles_labels()[1][0]:
+                self.ax.grid(axis='x')
+        except IndexError:
+            pass
+        self.legend_descript.setText(SPN_Info[int(self.select_graph[self.select_graph.rfind(' ')+1:])])
         self.fig.canvas.draw()
+
+    def click_btn_translate(self):
+        text = self.legend_descript.text()
+        if not text:
+            return
+        if text == 1:
+            self.feedback_label.setText(u"Для перевода нужен интернет")
+        text_trans = translate_to_russian(text)
+        if text == text_trans:
+            spn = text[text.find('N')+1:text.find(' ')]
+            text_trans = SPN_Info[int(spn)]
+        self.legend_descript.setText(text_trans)
 
 
 if __name__ == "__main__":
